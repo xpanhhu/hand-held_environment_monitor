@@ -1,14 +1,13 @@
 
 
 void setup() {
-  // put your setup code here, to run once:
-
+  Serial.begin(9600);
+  dust_sensor_init();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  Serial.println("Hello Arduino!");
-  Serial.println("Hello Feng Wei");
+  dust_sensor_execute();
+  hcho_sensor_execute();
 }
 
 
