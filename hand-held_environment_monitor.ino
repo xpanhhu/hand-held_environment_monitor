@@ -7,8 +7,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-Serial.println("Hello Arduino!");
-Serial.println("Hello!");
+  Serial.println("Hello Arduino!");
+  Serial.println("Hello Feng Wei");
 }
 
 
