@@ -15,12 +15,12 @@ void hcho_sensor_execute() {
   float Vc = 4.95; //Constant voltage from pin
   int sensorValue = analogRead(A0); //Read analog pin for voltage info in 10bits
   float Vf = sensorValue * 4.95 / 1023; // Voltage through pin when in presence of VOCs(formaldehyde)
-  Serial.print("Vf: ");
-  Serial.println(Vf);
-  Serial.print("Formaldehyde Concentration: ");
+  //Serial.print("Vf: ");
+  //Serial.println(Vf);
+  Serial.print("HCHo Concentration: ");
   Serial.print(concentrationPPMform(Vf, Vi));
   Serial.print("ppm\n"); //Print concentration data
-  delay(500);
+  delay(2000);
 }
 
 float concentrationPPMform(float V, float Vstart) { //formaldehde concentration
