@@ -71,6 +71,7 @@ const unsigned char SeeedLogo[] PROGMEM = {
 
 void oled128_display_init()
 {
+  Serial.println("oled128_display_init...");
   Wire.begin();
   SeeedOled.init();  //initialze SEEED OLED display
   DDRB |= 0x21;
@@ -86,11 +87,16 @@ void oled128_display_init()
 
 void oled128_display_execute(int airQuality, float tadc, float hcho, float co, float ch4)
 {
-  while (true) {
+  Serial.println("oled128_display_execute...");
+  Serial.println(tadc);
+//  while (true) {
     //page 1
     displayHeader();
+    Serial.println("displayHeader");
     displayAirQuality(airQuality);
+    Serial.println("displayAirQuality");
     displayTadc(tadc);
+    Serial.println("displayTadc");
     displayFooter(1);
     clearCurrentDisplay();
     //page 2
@@ -104,7 +110,7 @@ void oled128_display_execute(int airQuality, float tadc, float hcho, float co, f
     displayCh4(ch4);
     displayFooter(3);
     clearCurrentDisplay();
-  }
+//  }
 }
 
 void displayAirQuality(int airQuality)
@@ -164,7 +170,7 @@ void displayCo(float co)
 
 void displayHeader() {
   SeeedOled.setTextXY(0, 0);
-  SeeedOled.putString("----------------");  
+  SeeedOled.putString("----------------");
 }
 
 void displayFooter(int pageSize)
