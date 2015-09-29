@@ -88,18 +88,21 @@ void oled128_display_execute(int airQuality, float tadc, float hcho, float co, f
 {
   while (true) {
     //page 1
+    displayHeader();
     displayAirQuality(airQuality);
     displayTadc(tadc);
-    displayPageSize(1);
+    displayFooter(1);
     clearCurrentDisplay();
     //page 2
+    displayHeader();
     displayHcho(hcho);
     displayCo(co);
-    displayPageSize(2);
+    displayFooter(2);
     clearCurrentDisplay();
     //page 3
+    displayHeader();
     displayCh4(ch4);
-    displayPageSize(3);
+    displayFooter(3);
     clearCurrentDisplay();
   }
 }
@@ -159,11 +162,19 @@ void displayCo(float co)
   SeeedOled.putFloat(co);
 }
 
-void displayPageSize(int pageSize)
+void displayHeader() {
+  SeeedOled.setTextXY(0, 0);
+  SeeedOled.putString("----------------");  
+}
+
+void displayFooter(int pageSize)
 {
+  SeeedOled.setTextXY(6, 0);
+  SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
-  SeeedOled.putString("          PAGE ");
+  SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(pageSize);
+  SeeedOled.putString("/3");
 }
 
 void clearCurrentDisplay()
