@@ -20,7 +20,7 @@ void loop() {
   hcho_sensor_execute();
   mq2_sensor_execute();
   airQuality_sensor_execute();
-  oled128_display_execute();
+  oled128_display_execute(1, 2.5, 3.5, 4.5, 5.5);
   network_execute();
 }
 
