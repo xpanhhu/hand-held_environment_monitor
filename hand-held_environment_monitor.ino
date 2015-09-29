@@ -9,11 +9,19 @@
 void setup() {
   Serial.begin(9600);
   dust_sensor_init();
+  mq2_sensor_init();
+  airQuality_sensor_init();
+  oled128_display_init();
+  network_init();
 }
 
 void loop() {
   dust_sensor_execute();
   hcho_sensor_execute();
+  mq2_sensor_execute();
+  airQuality_sensor_execute();
+  oled128_display_execute();
+  network_execute();
 }
 
 
