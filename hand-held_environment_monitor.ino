@@ -6,16 +6,16 @@
  * air  sensor
 */
 #define DIGIT_PIN_DUST_SENSOR 8
-//#define ANALOG_PIN_HQ2_SENSOR 0
-//#define ANALOG_PIN_HCHO_SENSOR 1
-//#define ANALOG_PIN_AIRQ_SENSOR 2
+#define ANALOG_PIN_HQ2_SENSOR 0
+#define ANALOG_PIN_HCHO_SENSOR 1
+#define ANALOG_PIN_AIRQ_SENSOR 2
 #define DUST_VALUE 0
-//#define HCHO_VALUE 1
-//#define AIRQ_VALUE 2
-//#define CO_VALUE 3
-//#define CH4_VALUE 4
+#define HCHO_VALUE 1
+#define AIRQ_VALUE 2
+#define CO_VALUE 3
+#define CH4_VALUE 4
 
-float values[5] = {0};
+float values[5];
 
 void setup() {
   Serial.begin(9600);
@@ -52,7 +52,7 @@ void loop() {
   //  Serial.print(values[AIRQ_VALUE]);
   //  Serial.println("\n");
   //oled128_display_execute();
-  oled128_display_execute(0, values[DUST_VALUE], 0, 0, 0);//air,dust,hcho,co,ch4
+  oled128_display_execute(0, 200, 0, 0, 0);//air,dust,hcho,co,ch4
   //network_execute();
 }
 
