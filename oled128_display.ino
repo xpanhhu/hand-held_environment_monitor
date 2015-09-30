@@ -85,32 +85,31 @@ void oled128_display_init()
   SeeedOled.clearDisplay();
 }
 
-void oled128_display_execute(int airQuality, float tadc, float hcho, float co, float ch4)
+void oled128_display_execute(int airQuality, float dust, float hcho, float co, float ch4)
 {
   Serial.println("oled128_display_execute...");
-  Serial.println(tadc);
-//  while (true) {
-    //page 1
-    displayHeader();
-    Serial.println("displayHeader");
-    displayAirQuality(airQuality);
-    Serial.println("displayAirQuality");
-    displayTadc(tadc);
-    Serial.println("displayTadc");
-    displayFooter(1);
-    clearCurrentDisplay();
-    //page 2
-    displayHeader();
-    displayHcho(hcho);
-    displayCo(co);
-    displayFooter(2);
-    clearCurrentDisplay();
-    //page 3
-    displayHeader();
-    displayCh4(ch4);
-    displayFooter(3);
-    clearCurrentDisplay();
-//  }
+  Serial.println("airQuality=" + (String)airQuality);
+  Serial.println("dust=" + (String)dust);
+  Serial.println("hcho=" + (String)hcho);
+  Serial.println("co=" + (String)co);
+  Serial.println("ch4=" + (String)ch4);
+  //page 1
+  displayHeader();
+  displayAirQuality(airQuality);
+  displayDust(dust);
+  displayFooter(1);
+  clearCurrentDisplay();
+  //page 2
+  displayHeader();
+  displayHcho(hcho);
+  displayCo(co);
+  displayFooter(2);
+  clearCurrentDisplay();
+  //page 3
+  displayHeader();
+  displayCh4(ch4);
+  displayFooter(3);
+  clearCurrentDisplay();
 }
 
 void displayAirQuality(int airQuality)
@@ -136,10 +135,10 @@ void displayAirQuality(int airQuality)
   }
 }
 
-void displayTadc(float tadc)
+void displayDust(float tadc)
 {
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putString("TADC(pcs/0.01cf)");
+  SeeedOled.putString("Dust(pcs/0.01cf)");
   SeeedOled.setTextXY(5, 0);
   SeeedOled.putFloat(tadc);
 }
