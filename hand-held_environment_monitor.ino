@@ -27,6 +27,7 @@ void setup() {
 }
 
 void loop() {
+  oled128_display_sapmlling();
   values[DUST_VALUE] = dust_sensor_execute(DIGIT_PIN_DUST_SENSOR);
   Serial.print("concentration = ");
   Serial.print(values[DUST_VALUE]);
@@ -52,7 +53,7 @@ void loop() {
   //  Serial.print(values[AIRQ_VALUE]);
   //  Serial.println("\n");
   //oled128_display_execute();
-  oled128_display_execute(0, 200, 0, 0, 0);//air,dust,hcho,co,ch4
+  oled128_display_analysis_result(0, 200, 0, 0, 0);//air,dust,hcho,co,ch4
   //network_execute();
 }
 

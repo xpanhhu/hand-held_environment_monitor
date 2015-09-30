@@ -81,11 +81,17 @@ void oled128_display_init()
   SeeedOled.setPageMode();           //Set addressing mode to Page Mode
   SeeedOled.setTextXY(0, 0);         //Set the cursor to Xth Page, Yth Column
   SeeedOled.drawBitmap((unsigned char*)SeeedLogo, 1024);    // 1024 = 128 Pixels * 64 Pixels / 8
-  delay(1000);
+  delay(2000);
   SeeedOled.clearDisplay();
 }
 
-void oled128_display_execute(int airQuality, float dust, float hcho, float co, float ch4)
+void oled128_display_sapmlling()
+{
+  SeeedOled.setTextXY(4, 0);
+  SeeedOled.putString("AIR SAMPLLING...");
+}
+
+void oled128_display_analysis_result(int airQuality, float dust, float hcho, float co, float ch4)
 {
   Serial.println("oled128_display_execute...");
   Serial.println("airQuality=" + (String)airQuality);
@@ -93,23 +99,28 @@ void oled128_display_execute(int airQuality, float dust, float hcho, float co, f
   Serial.println("hcho=" + (String)hcho);
   Serial.println("co=" + (String)co);
   Serial.println("ch4=" + (String)ch4);
+
+  clearCurrentDisplay(0);
+
   //page 1
   displayHeader();
   displayAirQuality(airQuality);
   displayDust(dust);
   displayFooter(1);
-  clearCurrentDisplay();
+  clearCurrentDisplay(3000);
+
   //page 2
   displayHeader();
   displayHcho(hcho);
   displayCo(co);
   displayFooter(2);
-  clearCurrentDisplay();
+  clearCurrentDisplay(3000);
+
   //page 3
   displayHeader();
   displayCh4(ch4);
   displayFooter(3);
-  clearCurrentDisplay();
+  clearCurrentDisplay(3000);
 }
 
 void displayAirQuality(int airQuality)
@@ -135,12 +146,12 @@ void displayAirQuality(int airQuality)
   }
 }
 
-void displayDust(float tadc)
+void displayDust(float dust)
 {
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("Dust(pcs/0.01cf)");
   SeeedOled.setTextXY(5, 0);
-  SeeedOled.putFloat(tadc);
+  SeeedOled.putFloat(dust);
 }
 
 void displayCh4(float ch4)
@@ -182,9 +193,12 @@ void displayFooter(int pageSize)
   SeeedOled.putString("/3");
 }
 
-void clearCurrentDisplay()
+void clearCurrentDisplay(long delayMs)
 {
-  delay(3000);
+  if (delayMs > 0)
+  {
+    delay(delayMs);
+  }
   SeeedOled.clearDisplay();
 }
 
