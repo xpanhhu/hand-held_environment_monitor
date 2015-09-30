@@ -5,6 +5,17 @@
  * MQ2  sensor
  * air  sensor
 */
+#include <Bridge.h>
+#include <Console.h>
+#include <FileIO.h>
+#include <HttpClient.h>
+#include <Mailbox.h>
+#include <Process.h>
+#include <YunClient.h>
+#include <YunServer.h>
+
+#include "yeelinkclient.h"
+
 #define DIGIT_PIN_DUST_SENSOR 8
 #define ANALOG_PIN_HQ2_SENSOR 0
 #define ANALOG_PIN_HCHO_SENSOR 1
@@ -24,6 +35,7 @@ void setup() {
   //dust_sensor_init();
   //mq2_sensor_init();
   //network_init();
+  clientInit();
 }
 
 void loop() {
@@ -59,7 +71,13 @@ void loop() {
   int airQuality = getSensorValueFromAirQualitySensor();
   Serial.print("airQuality=" + (String)airQuality);
   displayAnalysisResult(airQuality, 200, 0, 0, 0);  //air,dust,hcho,co,ch4
-  
+
+  curlPostData(values[0], SENSOR_1);
+  curlPostData(values[1], SENSOR_2);
+  curlPostData(values[2], SENSOR_3);
+  curlPostData(values[3], SENSOR_4);
+  curlPostData(values[4], SENSOR_5);
+  delay(1000 * 30);
   //network_execute();
 }
 
