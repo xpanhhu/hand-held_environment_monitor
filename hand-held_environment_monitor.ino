@@ -19,15 +19,17 @@ float values[5];
 
 void setup() {
   Serial.begin(9600);
+  initOled128Display();
+  initAirQualitySensor();
   //dust_sensor_init();
   //mq2_sensor_init();
-  //airQuality_sensor_init();
-  oled128_display_init();
   //network_init();
 }
 
 void loop() {
-  oled128_display_sapmlling();
+  
+  displaySapmlling();
+  
   values[DUST_VALUE] = dust_sensor_execute(DIGIT_PIN_DUST_SENSOR);
   Serial.print("concentration = ");
   Serial.print(values[DUST_VALUE]);
@@ -53,7 +55,11 @@ void loop() {
   //  Serial.print(values[AIRQ_VALUE]);
   //  Serial.println("\n");
   //oled128_display_execute();
-  oled128_display_analysis_result(0, 200, 0, 0, 0);//air,dust,hcho,co,ch4
+
+  int airQuality = getSensorValueFromAirQualitySensor();
+  Serial.print("airQuality=" + (String)airQuality);
+  displayAnalysisResult(airQuality, 200, 0, 0, 0);  //air,dust,hcho,co,ch4
+  
   //network_execute();
 }
 

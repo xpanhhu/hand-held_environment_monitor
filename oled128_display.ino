@@ -2,7 +2,7 @@
 #include <SeeedOLED.h>
 #include <avr/pgmspace.h>
 
-const unsigned char SeeedLogo[] PROGMEM = {
+const unsigned char TietoLogo[] PROGMEM = {
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -69,9 +69,9 @@ const unsigned char SeeedLogo[] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-void oled128_display_init()
+void initOled128Display()
 {
-  Serial.println("oled128_display_init...");
+  Serial.println("initOled128Display()");
   Wire.begin();
   SeeedOled.init();  //initialze SEEED OLED display
   DDRB |= 0x21;
@@ -80,20 +80,20 @@ void oled128_display_init()
   SeeedOled.setNormalDisplay();      //Set display to normal mode (i.e non-inverse mode)
   SeeedOled.setPageMode();           //Set addressing mode to Page Mode
   SeeedOled.setTextXY(0, 0);         //Set the cursor to Xth Page, Yth Column
-  SeeedOled.drawBitmap((unsigned char*)SeeedLogo, 1024);    // 1024 = 128 Pixels * 64 Pixels / 8
+  SeeedOled.drawBitmap((unsigned char*)TietoLogo, 1024);    // 1024 = 128 Pixels * 64 Pixels / 8
   delay(2000);
   SeeedOled.clearDisplay();
 }
 
-void oled128_display_sapmlling()
+void displaySapmlling()
 {
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("AIR SAMPLLING...");
 }
 
-void oled128_display_analysis_result(int airQuality, float dust, float hcho, float co, float ch4)
+void displayAnalysisResult(int airQuality, float dust, float hcho, float co, float ch4)
 {
-  Serial.println("oled128_display_execute...");
+  Serial.println("displayAnalysisResult()");
   Serial.println("airQuality=" + (String)airQuality);
   Serial.println("dust=" + (String)dust);
   Serial.println("hcho=" + (String)hcho);
