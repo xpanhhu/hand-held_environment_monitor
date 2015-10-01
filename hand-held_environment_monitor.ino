@@ -30,54 +30,54 @@ float values[5];
 
 void setup() {
   Serial.begin(9600);
-  initOled128Display();
-  initAirQualitySensor();
-  //dust_sensor_init();
+  //initOled128Display();
+  //initAirQualitySensor();
   //mq2_sensor_init();
   //network_init();
-  clientInit();
+  //clientInit();
 }
 
 void loop() {
-  
-  displaySapmlling();
+  //displaySapmlling();
   
   values[DUST_VALUE] = dust_sensor_execute(DIGIT_PIN_DUST_SENSOR);
   Serial.print("concentration = ");
   Serial.print(values[DUST_VALUE]);
   Serial.println(" pcs/0.01cf");
   Serial.println("\n");
-  //  hcho_sensor_execute();
-  //  values[HCHO_VALUE] = 0;
-  //  Serial.print("HCHO ppm = ");
-  //  Serial.print(values[HCHO_VALUE]);
-  //  Serial.println("\n");
+  
+  //hcho_sensor_execute();
+  //values[HCHO_VALUE] = 0;
+  //Serial.print("HCHO ppm = ");
+  //Serial.print(values[HCHO_VALUE]);
+  //Serial.println("\n");
+  
   //mq2_sensor_execute();
-  //  values[CO_VALUE] = 0;
-  //  Serial.print("CO ppm= ");
-  //  Serial.print(values[CO_VALUE]);
-  //  Serial.println("\n");
-  //  values[CH4_VALUE] = 0;
-  //  Serial.print("CH4 ppm= ");
-  //  Serial.print(values[CH4_VALUE]);
-  //  Serial.println("\n");
-  //  values[AIRQ_VALUE] = airQuality_sensor_execute();
-  //  values[AIRQ_VALUE] = 0;
-  //  Serial.print("AIRQ = ");
-  //  Serial.print(values[AIRQ_VALUE]);
-  //  Serial.println("\n");
-  //oled128_display_execute();
+  //values[CO_VALUE] = 0;
+  //Serial.print("CO ppm= ");
+  //Serial.print(values[CO_VALUE]);
+  //Serial.println("\n");
+  //values[CH4_VALUE] = 0;
+  //Serial.print("CH4 ppm= ");
+  //Serial.print(values[CH4_VALUE]);
+  //Serial.println("\n");
+  //values[AIRQ_VALUE] = airQuality_sensor_execute();
+  //values[AIRQ_VALUE] = 0;
+  //Serial.print("AIRQ = ");
+  //Serial.print(values[AIRQ_VALUE]);
+  //Serial.println("\n");
+  //int airQuality = getSensorValueFromAirQualitySensor();
+  //Serial.print("airQuality=" + (String)airQuality);
+  
+  //displayAnalysisResult(airQuality, 200, 0, 0, 0);  //air,dust,hcho,co,ch4
 
-  int airQuality = getSensorValueFromAirQualitySensor();
-  Serial.print("airQuality=" + (String)airQuality);
-  displayAnalysisResult(airQuality, 200, 0, 0, 0);  //air,dust,hcho,co,ch4
-
-  curlPostData(values[0], SENSOR_1);
-  curlPostData(values[1], SENSOR_2);
-  curlPostData(values[2], SENSOR_3);
-  curlPostData(values[3], SENSOR_4);
-  curlPostData(values[4], SENSOR_5);
-  delay(1000 * 30);
+  //curlPostData(values[0], SENSOR_1);
+  //curlPostData(values[1], SENSOR_2);
+  //curlPostData(values[2], SENSOR_3);
+  //curlPostData(values[3], SENSOR_4);
+  //curlPostData(values[4], SENSOR_5);
+  //delay(1000 * 30);
   //network_execute();
 }
+
 

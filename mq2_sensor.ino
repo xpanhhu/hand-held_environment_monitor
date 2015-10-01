@@ -22,7 +22,7 @@ void mq2_sensor_init() {
 
   Serial.print("R0 = ");
   Serial.println(R0);
-  
+
 }
 
 void mq2_sensor_execute() {
@@ -47,9 +47,9 @@ void mq2_sensor_execute() {
   Serial.println(ratio);
 
   //float H2 = 1000 * ratio ;
-  
-  float CH4 = 1000 * ratio /1.8;
-  float Smoke = 1000 * ratio/1.9;
+
+  float CH4 = 1000 * ratio / 1.8;
+  float Smoke = 1000 * ratio / 1.9;
   Serial.print("CH4 = ");
   Serial.print(CH4);
   Serial.print("SMOKE = ");

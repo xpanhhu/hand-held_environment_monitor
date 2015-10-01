@@ -14,6 +14,6 @@
 
 void clientInit();
 
-void curlPostData(float dataParam, String sensorId, String deviceId=DEVICE_ID);
+void curlPostData(float dataParam, String sensorId, String deviceId = DEVICE_ID);
 
 #endif
