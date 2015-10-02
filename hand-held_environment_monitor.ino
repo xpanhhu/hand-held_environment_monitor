@@ -16,68 +16,39 @@
 
 #include "yeelinkclient.h"
 
-#define DIGIT_PIN_DUST_SENSOR 8
-#define ANALOG_PIN_HQ2_SENSOR 0
-#define ANALOG_PIN_HCHO_SENSOR 1
-#define ANALOG_PIN_AIRQ_SENSOR 2
-#define DUST_VALUE 0
-#define HCHO_VALUE 1
-#define AIRQ_VALUE 2
-#define CO_VALUE 3
-#define CH4_VALUE 4
+#define MQ2_SENSOR_ANALOG_PIN 0
+#define HCHO_SENSOR_ANALOG_PIN 1
+#define AIRQ_SENSOR_ANALOG_PIN 2
+#define DUST_SENSOR_DIGITAL_PIN 8
 
-float values[5];
+#define DUST_VALUE_INDEX 0
+#define HCHO_VALUE_INDEX 1
+#define AIRQ_VALUE_INDEX 2
+#define CO_VALUE_INDEX 3
+#define CH4_VALUE_INDEX 4
+
+float sensorValues[5];
 
 void setup() {
   Serial.begin(9600);
-  //initOled128Display();
-  //initAirQualitySensor();
-  //mq2_sensor_init();
-  //network_init();
-  //clientInit();
+  initOled128Display();
+  initAirQualitySensor();
 }
 
 void loop() {
-  //displaySapmlling();
   
-  values[DUST_VALUE] = dust_sensor_execute(DIGIT_PIN_DUST_SENSOR);
-  Serial.print("concentration = ");
-  Serial.print(values[DUST_VALUE]);
-  Serial.println(" pcs/0.01cf");
-  Serial.println("\n");
-  
-  //hcho_sensor_execute();
-  //values[HCHO_VALUE] = 0;
-  //Serial.print("HCHO ppm = ");
-  //Serial.print(values[HCHO_VALUE]);
-  //Serial.println("\n");
-  
-  //mq2_sensor_execute();
-  //values[CO_VALUE] = 0;
-  //Serial.print("CO ppm= ");
-  //Serial.print(values[CO_VALUE]);
-  //Serial.println("\n");
-  //values[CH4_VALUE] = 0;
-  //Serial.print("CH4 ppm= ");
-  //Serial.print(values[CH4_VALUE]);
-  //Serial.println("\n");
-  //values[AIRQ_VALUE] = airQuality_sensor_execute();
-  //values[AIRQ_VALUE] = 0;
-  //Serial.print("AIRQ = ");
-  //Serial.print(values[AIRQ_VALUE]);
-  //Serial.println("\n");
-  //int airQuality = getSensorValueFromAirQualitySensor();
-  //Serial.print("airQuality=" + (String)airQuality);
-  
-  //displayAnalysisResult(airQuality, 200, 0, 0, 0);  //air,dust,hcho,co,ch4
+  displaySapmlling();
 
-  //curlPostData(values[0], SENSOR_1);
-  //curlPostData(values[1], SENSOR_2);
-  //curlPostData(values[2], SENSOR_3);
-  //curlPostData(values[3], SENSOR_4);
-  //curlPostData(values[4], SENSOR_5);
-  //delay(1000 * 30);
-  //network_execute();
+  sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
+  sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute(DUST_SENSOR_DIGITAL_PIN);
+
+  // TODO this method needs to refactor @FengWei
+  displayAnalysisResult(sensorValues[AIRQ_VALUE_INDEX],
+                        sensorValues[DUST_VALUE_INDEX],
+                        sensorValues[HCHO_VALUE_INDEX],
+                        sensorValues[CO_VALUE_INDEX],
+                        sensorValues[CH4_VALUE_INDEX]);
+
 }
 
 
