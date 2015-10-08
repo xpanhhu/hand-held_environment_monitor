@@ -28,11 +28,13 @@
 #define CH4_VALUE_INDEX 4
 
 float sensorValues[5];
+float MQ2_R0;
 
 void setup() {
   Serial.begin(9600);
   initOled128Display();
   initAirQualitySensor();
+  initMQ2Sensor();
 }
 
 void loop() {
@@ -41,6 +43,7 @@ void loop() {
 
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
   sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute(DUST_SENSOR_DIGITAL_PIN);
+  sensorValues[CH4_VALUE_INDEX] = mq2_sensor_execute(MQ2_SENSOR_ANALOG_PIN);
 
   // TODO this method needs to refactor @FengWei
   displayAnalysisResult(sensorValues[AIRQ_VALUE_INDEX],
@@ -48,6 +51,7 @@ void loop() {
                         sensorValues[HCHO_VALUE_INDEX],
                         sensorValues[CO_VALUE_INDEX],
                         sensorValues[CH4_VALUE_INDEX]);
+  delay(3000);
 
 }
 

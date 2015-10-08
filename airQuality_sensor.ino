@@ -13,7 +13,6 @@ int getSensorValueFromAirQualitySensor() {
   Serial.println("getSensorValueFromAirQualitySensor()");
   current_quality = airqualitysensor.slope();
   Serial.println("current_quality=" + (String)current_quality);
-  delay(5000);
   return current_quality;
 }
 

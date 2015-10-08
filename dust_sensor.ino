@@ -7,7 +7,6 @@ float dust_sensor_execute(int pin) {
   unsigned long concentration = 0;
   
   pinMode(pin, INPUT);
-  delay(500);
   
   starttime = millis();//get the current time;
   while (true) {
