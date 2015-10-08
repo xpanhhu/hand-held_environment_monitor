@@ -31,6 +31,7 @@ float sensorValues[5];
 float MQ2_R0;
 
 void setup() {
+  clientInit();
   Serial.begin(9600);
   initOled128Display();
   initAirQualitySensor();
