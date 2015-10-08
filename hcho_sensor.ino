@@ -18,7 +18,6 @@ float hcho = 30.0300;
 
 void initHchoSensor() {
   Serial.println("initHchoSensor()");
-  Serial.begin(9600);
 }
 
 float hcho_sensor_execute(int pin) {

@@ -5,7 +5,6 @@ int current_quality = -1;
 
 void initAirQualitySensor() {
   Serial.println("initAirQualitySensor()");
-  Serial.begin(9600);
   airqualitysensor.init(14);
 }
 
@@ -21,7 +20,7 @@ ISR(TIMER2_OVF_vect)
   if (airqualitysensor.counter == 122) //set 2 seconds as a detected duty
   {
     airqualitysensor.last_vol = airqualitysensor.first_vol;
-    airqualitysensor.first_vol = analogRead(A0);
+    airqualitysensor.first_vol = analogRead(A2);
     airqualitysensor.counter = 0;
     airqualitysensor.timer_index = 1;
     PORTB = PORTB ^ 0x20;

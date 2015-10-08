@@ -33,8 +33,8 @@ float MQ2_R0;
 void setup() {
   Serial.begin(9600);
   initOled128Display();
-  //initAirQualitySensor();
-  //initMQ2Sensor();
+  initAirQualitySensor();
+  initMQ2Sensor();
   initHchoSensor();
 }
 
@@ -42,9 +42,9 @@ void loop() {
 
   displaySapmlling();
 
-  //sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
-  //sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute(DUST_SENSOR_DIGITAL_PIN);
-  //sensorValues[CH4_VALUE_INDEX] = mq2_sensor_execute(MQ2_SENSOR_ANALOG_PIN);
+  sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
+  sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute(DUST_SENSOR_DIGITAL_PIN);
+  sensorValues[CH4_VALUE_INDEX] = mq2_sensor_execute(MQ2_SENSOR_ANALOG_PIN);
   sensorValues[HCHO_VALUE_INDEX] = hcho_sensor_execute(HCHO_SENSOR_ANALOG_PIN);
 
   // TODO this method needs to refactor @FengWei
@@ -54,12 +54,12 @@ void loop() {
                         sensorValues[CO_VALUE_INDEX],
                         sensorValues[CH4_VALUE_INDEX]);
 
-  curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_1);
-  curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_2);
-  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_3);
-  curlPostData(sensorValues[CO_VALUE_INDEX], SENSOR_4);
-  curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_5);
-  delay(1000 * 30);
+//  curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_1);
+//  curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_2);
+//  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_3);
+//  curlPostData(sensorValues[CO_VALUE_INDEX], SENSOR_4);
+//  curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_5);
+//  delay(1000 * 30);
 
 }
 
