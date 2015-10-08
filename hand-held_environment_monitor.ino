@@ -38,7 +38,7 @@ void setup() {
 }
 
 void loop() {
-  
+
   displaySapmlling();
 
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
@@ -51,7 +51,13 @@ void loop() {
                         sensorValues[HCHO_VALUE_INDEX],
                         sensorValues[CO_VALUE_INDEX],
                         sensorValues[CH4_VALUE_INDEX]);
-  delay(3000);
+
+  curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_1);
+  curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_2);
+  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_3);
+  curlPostData(sensorValues[CO_VALUE_INDEX], SENSOR_4);
+  curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_5);
+  delay(1000 * 30);
 
 }
 
