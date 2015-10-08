@@ -165,7 +165,7 @@ void displayCh4(float ch4)
 void displayHcho(float hcho)
 {
   SeeedOled.setTextXY(1, 0);
-  SeeedOled.putString("HCHO(ppm)");
+  SeeedOled.putString("HCHO(mg/m3)");
   SeeedOled.setTextXY(2, 0);
   SeeedOled.putFloat(hcho);
 }
