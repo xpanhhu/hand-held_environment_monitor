@@ -4,14 +4,14 @@ AirQuality airqualitysensor;
 int current_quality = -1;
 
 void initAirQualitySensor() {
-  Serial.println("initAirQualitySensor()");
+  Console.println("initAirQualitySensor()");
   airqualitysensor.init(14);
 }
 
 int getSensorValueFromAirQualitySensor() {
-  Serial.println("getSensorValueFromAirQualitySensor()");
+  Console.println("getSensorValueFromAirQualitySensor()");
   current_quality = airqualitysensor.slope();
-  Serial.println("current_quality=" + (String)current_quality);
+  Console.println("current_quality=" + (String)current_quality);
   return current_quality;
 }
 

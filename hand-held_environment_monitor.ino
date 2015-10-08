@@ -32,7 +32,7 @@ float MQ2_R0;
 
 void setup() {
   clientInit();
-  Serial.begin(9600);
+  Console.begin();
   initOled128Display();
   initAirQualitySensor();
   initMQ2Sensor();
@@ -60,7 +60,6 @@ void loop() {
   curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_3);
   curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_4);
   curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_5);
-//  delay(1000 * 30);
 
 }
 

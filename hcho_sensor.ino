@@ -17,11 +17,11 @@ float c2h6o = 46.0700;
 float hcho = 30.0300;
 
 void initHchoSensor() {
-  Serial.println("initHchoSensor()");
+  Console.println("initHchoSensor()");
 }
 
 float hcho_sensor_execute(int pin) {
-  Serial.println("hcho_sensor_execute()");
+  Console.println("hcho_sensor_execute()");
 
   //1, read the sensor and covert sensor value
   int sensorValue = analogRead(A1);
@@ -29,15 +29,15 @@ float hcho_sensor_execute(int pin) {
 
   //2, calculate ppm, this formula is from http://www.instructables.com/id/Simple-Arduino-Formaldehyde-Sensor/
   float ppm = 212.32619543773774 * exp(-(7.653015806367451 * (4.95 - Vrl) * Vstart) / (Vrl * (4.95 - Vstart)));
-  Serial.print("HCHO in ppm: ");
-  Serial.print(ppm);
-  Serial.println("ppm");
+  Console.print("HCHO in ppm: ");
+  Console.print(ppm);
+  Console.println("ppm");
 
   //3, calculate mg/m3
   float mg = hcho * ppm / 22.40 * 273 / (273 + temperature);
-  Serial.print("HCHO in mg: ");
-  Serial.print(mg);
-  Serial.println("mg/m3");
+  Console.print("HCHO in mg: ");
+  Console.print(mg);
+  Console.println("mg/m3");
 
   //4, delay and return
   return mg;

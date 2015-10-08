@@ -13,16 +13,16 @@ void initMQ2Sensor() {
   RS_air = (5.0 - sensor_volt) / sensor_volt; // omit *RL
   MQ2_R0 = RS_air; // The ratio of RS/R0 is 10 in a clear air
 
-  Serial.print("sensor_volt = ");
-  Serial.print(sensor_volt);
-  Serial.println("V");
+  Console.print("sensor_volt = ");
+  Console.print(sensor_volt);
+  Console.println("V");
 
 }
 
 float mq2_sensor_execute(int pin) {
 
-  Serial.print("R0 = ");
-  Serial.println(MQ2_R0);
+  Console.print("R0 = ");
+  Console.println(MQ2_R0);
   float sensor_volt;
   float RS_gas; // Get value of RS in a GAS
   float ratio; // Get ratio RS_GAS/RS_air
@@ -35,8 +35,8 @@ float mq2_sensor_execute(int pin) {
   /*-----------------------------------------------------------------------*/
   float CH4_PPM = (1000 - 200) * (ratio - 3) / (1.8 - 3) + 200;
 
-  Serial.print("Rs/R0 = ");
-  Serial.println(ratio);
+  Console.print("Rs/R0 = ");
+  Console.println(ratio);
   return CH4_PPM * 16 / 22.4 * 273 / (273 + 25);
 
 }
