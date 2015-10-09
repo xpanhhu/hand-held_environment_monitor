@@ -55,7 +55,7 @@ void curlPostData(float dataParam, String sensorId, String deviceId) {
   // Launch "curl" command and get Arduino ascii art logo from the network
   // curl is command line program for transferring data using different internet protocols
   Process p;        // Create a process and call it "p"
-  //command is like ("curl -d '{\"value\":14.5}' -H U-ApiKey:6259afea8328804a22589aa3c826751 http://api.yeelink.net/v1.0/device/340732/sensor/377542/datapoints");
+  //command is like ("curl -d '{"value":14.5}' -H U-ApiKey:6259afea8328804a22589aa3c8267512 http://api.yeelink.net/v1.0/device/340732/sensor/377542/datapoints");
 
   String param = "curl -d '{";
   param += "\"value\":";
