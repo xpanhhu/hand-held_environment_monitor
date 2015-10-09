@@ -16,12 +16,13 @@ void initDHTSensor() {
 float getTemperatureFromDHTSensor()
 {
   pinMode(DHT_SENSOR_DIGITAL_PIN, INPUT);
+  
   float t = dht.readTemperature();
   if (isnan(t))
   {
     t = 0; //set default value
   }
-
+  
   pinMode(DHT_SENSOR_DIGITAL_PIN, OUTPUT);
   return t;
 }
@@ -29,6 +30,7 @@ float getTemperatureFromDHTSensor()
 float getHumidityFromDHTSensor()
 {
   pinMode(DHT_SENSOR_DIGITAL_PIN, INPUT);
+  
   float h = dht.readHumidity();
   if (isnan(h))
   {

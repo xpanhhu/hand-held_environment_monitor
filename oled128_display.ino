@@ -91,36 +91,54 @@ void displaySapmlling()
   SeeedOled.putString("AIR SAMPLLING...");
 }
 
-void displayAnalysisResult(int airQuality, float dust, float hcho, float co, float ch4)
+void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, float temperature, float humidity)
 {
   Console.println("displayAnalysisResult()");
   Console.println("airQuality=" + (String)airQuality);
   Console.println("dust=" + (String)dust);
   Console.println("hcho=" + (String)hcho);
-  Console.println("co=" + (String)co);
   Console.println("ch4=" + (String)ch4);
+  Console.println("temperature=" + (String)temperature);
+  Console.println("humidity=" + (String)humidity);
 
   clearCurrentDisplay(0);
 
   //page 1
   displayHeader();
-  displayAirQuality(airQuality);
-  displayDust(dust);
+  displayTemperature(temperature);
+  displayHumidity(humidity);
   displayFooter(1);
-  clearCurrentDisplay(3000);
+  clearCurrentDisplay(4000);
 
   //page 2
   displayHeader();
-  displayHcho(hcho);
-  displayCo(co);
-  displayFooter(2);
-  clearCurrentDisplay(3000);
+  displayAirQuality(airQuality);
+  displayDust(dust);
+  displayFooter(1);
+  clearCurrentDisplay(4000);
 
   //page 3
   displayHeader();
+  displayHcho(hcho);
   displayCh4(ch4);
-  displayFooter(3);
-  clearCurrentDisplay(3000);
+  displayFooter(2);
+  clearCurrentDisplay(4000);
+}
+
+void displayTemperature(float temperature)
+{
+  SeeedOled.setTextXY(1, 0);
+  SeeedOled.putString("Temperature(C)");
+  SeeedOled.setTextXY(2, 0);
+  SeeedOled.putFloat(temperature);
+}
+
+void displayHumidity(float humidity)
+{
+  SeeedOled.setTextXY(4, 0);
+  SeeedOled.putString("Humidity(%)");
+  SeeedOled.setTextXY(5, 0);
+  SeeedOled.putFloat(humidity);
 }
 
 void displayAirQuality(int airQuality)
@@ -164,18 +182,10 @@ void displayCh4(float ch4)
 
 void displayHcho(float hcho)
 {
-  SeeedOled.setTextXY(1, 0);
-  SeeedOled.putString("HCHO(mg/m3)");
-  SeeedOled.setTextXY(2, 0);
-  SeeedOled.putFloat(hcho);
-}
-
-void displayCo(float co)
-{
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putString("CO(ppm)");
+  SeeedOled.putString("HCHO(mg/m3)");
   SeeedOled.setTextXY(5, 0);
-  SeeedOled.putFloat(co);
+  SeeedOled.putFloat(hcho);
 }
 
 void displayHeader() {
