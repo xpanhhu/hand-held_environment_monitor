@@ -5,7 +5,7 @@
  * MQ2  Gas Sensor
  * Air  Quality Sensor
  * Temperature&Humidity Sensor
- * 
+ *
  *  Written September 2015
 */
 #include <Bridge.h>
@@ -39,7 +39,7 @@ float MQ2_R0;
 void setup() {
   clientInit();
   Console.begin();
-  //initOled128Display();//Due to resource limit, OLED and Network output should be seperated. 
+  initOled128Display();//Due to resource limit, OLED and Network output should be seperated.
   initAirQualitySensor();
   initMQ2Sensor();
   initHCHOSensor();
@@ -47,8 +47,7 @@ void setup() {
 }
 
 void loop() {
-
-  //displaySapmlling();
+  displaySapmlling();
 
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
   sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute();
@@ -56,18 +55,18 @@ void loop() {
   sensorValues[HCHO_VALUE_INDEX] = HCHO_sensor_execute();
   sensorValues[TEMPERATURE_VALUE_INDEX] = getTemperatureFromDHTSensor();
   sensorValues[HUMIDITY_VALUE_INDEX] = getHumidityFromDHTSensor();
-  
-  // TODO this method needs to refactor @FengWei
-//  displayAnalysisResult(sensorValues[AIRQ_VALUE_INDEX],
-//                        sensorValues[DUST_VALUE_INDEX],
-//                        sensorValues[HCHO_VALUE_INDEX],
-//                        sensorValues[CH4_VALUE_INDEX]);
 
-//  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_1);
-//  curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_3);
-//  curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_4);
-//  curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_5);
-  
+  // TODO this method needs to refactor @FengWei
+  displayAnalysisResult(sensorValues[AIRQ_VALUE_INDEX],
+                        sensorValues[DUST_VALUE_INDEX],
+                        sensorValues[HCHO_VALUE_INDEX],
+                        sensorValues[CH4_VALUE_INDEX]);
+
+  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_1);
+  curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_3);
+  curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_4);
+  curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_5);
+
   delay(10000);
 }
 
