@@ -43,7 +43,7 @@ void loop() {
 
   displaySapmlling();
 
-  sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
+  sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor(AIRQ_SENSOR_ANALOG_PIN);
   sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute(DUST_SENSOR_DIGITAL_PIN);
   sensorValues[CH4_VALUE_INDEX] = mq2_sensor_execute(MQ2_SENSOR_ANALOG_PIN);
   sensorValues[HCHO_VALUE_INDEX] = hcho_sensor_execute(HCHO_SENSOR_ANALOG_PIN);

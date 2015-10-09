@@ -8,10 +8,12 @@ void initAirQualitySensor() {
   airqualitysensor.init(14);
 }
 
-int getSensorValueFromAirQualitySensor() {
+int getSensorValueFromAirQualitySensor(int pin) {
   Console.println("getSensorValueFromAirQualitySensor()");
+  pinMode(pin, INPUT);
   current_quality = airqualitysensor.slope();
   Console.println("current_quality=" + (String)current_quality);
+  pinMode(pin, OUTPUT);
   return current_quality;
 }
 
