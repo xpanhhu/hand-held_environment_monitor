@@ -39,7 +39,6 @@ void setup() {
   initOled128Display();//Due to resource limit, OLED and Network output should be seperated.
   initAirQualitySensor();
   initMQ2Sensor();
-  initHCHOSensor();
   initDHTSensor();
 }
 
