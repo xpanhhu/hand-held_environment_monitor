@@ -1,9 +1,12 @@
 /*
- * This demo is an open source machine for detect air quality.
- * dust sensor
+ * This demo is an open source machine for monitoring multi air indicator and environment data, and shows in both way: local OLED and Web.
+ * Dust Sensor
  * HCHO sensor
- * MQ2  sensor
- * air  sensor
+ * MQ2  Gas Sensor
+ * Air  Quality Sensor
+ * Temperature&Humidity Sensor
+ * 
+ *  Written September 2015
 */
 #include <Bridge.h>
 #include <Console.h>
@@ -33,7 +36,7 @@ float MQ2_R0;
 void setup() {
   clientInit();
   Console.begin();
-  initOled128Display();
+  initOled128Display();//Due to resource limit, OLED and Network output should be seperated. 
   initAirQualitySensor();
   initMQ2Sensor();
   initHchoSensor();
@@ -61,6 +64,7 @@ void loop() {
   curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_4);
   curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_5);
 
+  delay(10000);
 }
 
 
