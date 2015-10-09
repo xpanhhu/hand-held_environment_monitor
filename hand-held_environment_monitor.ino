@@ -42,7 +42,7 @@ void setup() {
   //initOled128Display();//Due to resource limit, OLED and Network output should be seperated. 
   initAirQualitySensor();
   initMQ2Sensor();
-  initHchoSensor();
+  initHCHOSensor();
   initDHTSensor();
 }
 
@@ -53,7 +53,7 @@ void loop() {
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
   sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute();
   sensorValues[CH4_VALUE_INDEX] = mq2_sensor_execute();
-  sensorValues[HCHO_VALUE_INDEX] = hcho_sensor_execute();
+  sensorValues[HCHO_VALUE_INDEX] = HCHO_sensor_execute();
   sensorValues[TEMPERATURE_VALUE_INDEX] = getTemperatureFromDHTSensor();
   sensorValues[HUMIDITY_VALUE_INDEX] = getHumidityFromDHTSensor();
   
