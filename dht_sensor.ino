@@ -18,8 +18,7 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 void initDHTSensor() {
-  Serial.begin(9600);
-  Serial.println("initDHTSensor()");
+  Console.println("initDHTSensor()");
   dht.begin();
 }
 
@@ -28,17 +27,17 @@ void initDHTSensor() {
 float getTemperatureFromDHTSensor()
 {
   pinMode(DHT_SENSOR_DIGITAL_PIN, INPUT);
-  Serial.println("getTemperatureFromDHTSensor()");
+  Console.println("getTemperatureFromDHTSensor()");
   float t = dht.readTemperature();
   if (isnan(t))
   {
-    Serial.println("Failed to read from DHT");
+    Console.println("Failed to read from DHT");
   }
   else
   {
-    Serial.print("Temperature: ");
-    Serial.print(t);
-    Serial.println(" *C");
+    Console.print("Temperature: ");
+    Console.print(t);
+    Console.println(" *C");
   }
   pinMode(DHT_SENSOR_DIGITAL_PIN, OUTPUT);
   return t;
@@ -47,17 +46,17 @@ float getTemperatureFromDHTSensor()
 float getHumidityFromDHTSensor()
 {
   pinMode(DHT_SENSOR_DIGITAL_PIN, INPUT);
-  Serial.println("getHumidityFromDHTSensor()");
+  Console.println("getHumidityFromDHTSensor()");
   float h = dht.readHumidity();
   if (isnan(h))
   {
-    Serial.println("Failed to read from DHT");
+    Console.println("Failed to read from DHT");
   }
   else
   {
-    Serial.print("Humidity: ");
-    Serial.print(h);
-    Serial.println(" %");
+    Console.print("Humidity: ");
+    Console.print(h);
+    Console.println(" %");
   }
   pinMode(DHT_SENSOR_DIGITAL_PIN, OUTPUT);
   return h;

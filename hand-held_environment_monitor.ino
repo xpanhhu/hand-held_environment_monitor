@@ -56,12 +56,13 @@ void loop() {
   sensorValues[HCHO_VALUE_INDEX] = hcho_sensor_execute();
   sensorValues[TEMPERATURE_VALUE_INDEX] = getTemperatureFromDHTSensor();
   sensorValues[HUMIDITY_VALUE_INDEX] = getHumidityFromDHTSensor();
-  
-  // TODO this method needs to refactor @FengWei
+
 //  displayAnalysisResult(sensorValues[AIRQ_VALUE_INDEX],
 //                        sensorValues[DUST_VALUE_INDEX],
 //                        sensorValues[HCHO_VALUE_INDEX],
-//                        sensorValues[CH4_VALUE_INDEX]);
+//                        sensorValues[CH4_VALUE_INDEX],
+//                        sensorValues[TEMPERATURE_VALUE_INDEX],
+//                        sensorValues[HUMIDITY_VALUE_INDEX]);
 
 //  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_1);
 //  curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_3);
