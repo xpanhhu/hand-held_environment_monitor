@@ -71,7 +71,6 @@ const unsigned char TietoLogo[] PROGMEM = {
 
 void initOled128Display()
 {
-  Console.println("initOled128Display()");
   Wire.begin();
   SeeedOled.init();  //initialze SEEED OLED display
   DDRB |= 0x21;
@@ -85,10 +84,10 @@ void initOled128Display()
   SeeedOled.clearDisplay();
 }
 
-void displaySapmlling()
+void displaySampling()
 {
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putString("AIR SAMPLLING...");
+  SeeedOled.putString("AIR SAMPLING...");
 }
 
 void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, float temperature, float humidity)

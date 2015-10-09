@@ -43,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-  displaySapmlling();
+  displaySampling();
   
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
   sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute();
