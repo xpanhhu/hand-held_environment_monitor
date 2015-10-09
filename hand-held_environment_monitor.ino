@@ -8,7 +8,7 @@
  *
  *  Written September 2015
 */
-#include <Console.h>
+#include <Process.h>
 #include "yeelinkclient.h"
 
 #define MQ2_SENSOR_ANALOG_PIN 'A0'
@@ -32,7 +32,6 @@
 #define SENSOR_TEMPERATURE_VALUE_INDEX "377543"//Temperature
 #define SENSOR_HUMIDITY_VALUE_INDEX "377933" //Humidity
 
-float sensorValues[6];
 
 void setup() {
   clientInit();
@@ -43,6 +42,7 @@ void setup() {
 }
 
 void loop() {
+  float sensorValues[6];
   displaySampling();
 
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
