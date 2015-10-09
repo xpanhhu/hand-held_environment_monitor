@@ -1,3 +1,4 @@
+float MQ2_R0;
 
 void initMQ2Sensor() {
   float sensor_volt;
@@ -5,7 +6,7 @@ void initMQ2Sensor() {
   float sensorValue;
   for (int x = 0 ; x < 100 ; x++)
   {
-    sensorValue = sensorValue + analogRead(A0);
+    sensorValue = sensorValue + analogRead(MQ2_SENSOR_ANALOG_PIN);
   }
   sensorValue = sensorValue / 100.0;
 
