@@ -20,11 +20,11 @@ void initHCHOSensor() {
   Console.println("initHCHOSensor()");
 }
 
-float HCHO_sensor_execute(int pin) {
+float HCHO_sensor_execute() {
   Console.println("HCHO_sensor_execute()");
 
   //1, read the sensor and covert sensor value
-  int sensorValue = analogRead(A1);
+  int sensorValue = analogRead(HCHO_SENSOR_ANALOG_PIN);
   float VRL = sensorValue * 4.95 / 1023;
 
   //2, calculate ppm, this formula is from http://www.instructables.com/id/Simple-Arduino-Formaldehyde-Sensor/
