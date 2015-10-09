@@ -13,15 +13,9 @@ void initMQ2Sensor() {
   sensor_volt = sensorValue / 1024 * 5.0;
   RS_air = (5.0 - sensor_volt) / sensor_volt; // omit *RL
   MQ2_R0 = RS_air; // The ratio of RS/R0 is 10 in a clear air
-
-  Console.print("sensor_volt = ");
-  Console.print(sensor_volt);
-  Console.println("V");
-
 }
 
 float mq2_sensor_execute() {
-
   Console.print("R0 = ");
   Console.println(MQ2_R0);
   float sensor_volt;
@@ -39,5 +33,4 @@ float mq2_sensor_execute() {
   Console.print("Rs/R0 = ");
   Console.println(ratio);
   return CH4_PPM * 16 / 22.4 * 273 / (273 + 25);
-
 }
