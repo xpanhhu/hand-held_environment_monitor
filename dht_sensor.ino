@@ -2,24 +2,12 @@
 // Written by ladyada, public domain
 
 #include "DHT.h"
-
 #define DHTPIN 2     // what pin we're connected to
-
-// Uncomment whatever type you're using!
-//#define DHTTYPE DHT11   // DHT 11
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
-
-// Connect pin 1 (on the left) of the sensor to +5V
-// Connect pin 2 of the sensor to whatever your DHTPIN is
-// Connect pin 4 (on the right) of the sensor to GROUND
-// Connect a 10K resistor from pin 2 (data) to pin 1 (power) of the sensor
 
 DHT dht(DHTPIN, DHTTYPE);
 
 void initDHTSensor() {
-  Serial.begin(9600);
-  Serial.println("initDHTSensor()");
   dht.begin();
 }
 
@@ -28,18 +16,13 @@ void initDHTSensor() {
 float getTemperatureFromDHTSensor()
 {
   pinMode(DHT_SENSOR_DIGITAL_PIN, INPUT);
-  Serial.println("getTemperatureFromDHTSensor()");
+  
   float t = dht.readTemperature();
   if (isnan(t))
   {
-    Serial.println("Failed to read from DHT");
+    t = 0; //set default value
   }
-  else
-  {
-    Serial.print("Temperature: ");
-    Serial.print(t);
-    Serial.println(" *C");
-  }
+  
   pinMode(DHT_SENSOR_DIGITAL_PIN, OUTPUT);
   return t;
 }
@@ -47,18 +30,13 @@ float getTemperatureFromDHTSensor()
 float getHumidityFromDHTSensor()
 {
   pinMode(DHT_SENSOR_DIGITAL_PIN, INPUT);
-  Serial.println("getHumidityFromDHTSensor()");
+  
   float h = dht.readHumidity();
   if (isnan(h))
   {
-    Serial.println("Failed to read from DHT");
+    h = 0; //set default value
   }
-  else
-  {
-    Serial.print("Humidity: ");
-    Serial.print(h);
-    Serial.println(" %");
-  }
+
   pinMode(DHT_SENSOR_DIGITAL_PIN, OUTPUT);
   return h;
 }

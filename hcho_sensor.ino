@@ -16,28 +16,18 @@
 #define C2H6O 46.0700
 #define HCHO 30.0300
 
-void initHCHOSensor() {
-  Console.println("initHCHOSensor()");
-}
-
 float HCHO_sensor_execute() {
-  Console.println("HCHO_sensor_execute()");
-
   //1, read the sensor and covert sensor value
   int sensorValue = analogRead(HCHO_SENSOR_ANALOG_PIN);
   float VRL = sensorValue * 4.95 / 1023;
 
   //2, calculate ppm, this formula is from http://www.instructables.com/id/Simple-Arduino-Formaldehyde-Sensor/
   float ppm = 212.32619543773774 * exp(-(7.653015806367451 * (4.95 - VRL) * V_START) / (VRL * (4.95 - V_START)));
-  Console.print("HCHO in ppm: ");
-  Console.print(ppm);
-  Console.println("ppm");
 
   //3, calculate mg/m3
   float mg = HCHO * ppm / 22.40 * 273 / (273 + TEMPERATURE);
   Console.print("HCHO in mg: ");
   Console.print(mg);
-  Console.println("mg/m3");
 
   //4, delay and return
   return mg;

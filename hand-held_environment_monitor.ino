@@ -8,15 +8,7 @@
  *
  *  Written September 2015
 */
-#include <Bridge.h>
 #include <Console.h>
-#include <FileIO.h>
-#include <HttpClient.h>
-#include <Mailbox.h>
-#include <Process.h>
-#include <YunClient.h>
-#include <YunServer.h>
-
 #include "yeelinkclient.h"
 
 #define MQ2_SENSOR_ANALOG_PIN 'A0'
@@ -47,7 +39,6 @@ void setup() {
   initOled128Display();//Due to resource limit, OLED and Network output should be seperated.
   initAirQualitySensor();
   initMQ2Sensor();
-  initHCHOSensor();
   initDHTSensor();
 }
 
@@ -61,15 +52,12 @@ void loop() {
   sensorValues[TEMPERATURE_VALUE_INDEX] = getTemperatureFromDHTSensor();
   sensorValues[HUMIDITY_VALUE_INDEX] = getHumidityFromDHTSensor();
 
-  // TODO this method needs to refactor @FengWei
-  /*
   displayAnalysisResult(sensorValues[AIRQ_VALUE_INDEX],
                         sensorValues[DUST_VALUE_INDEX],
                         sensorValues[HCHO_VALUE_INDEX],
                         sensorValues[CH4_VALUE_INDEX],
                         sensorValues[TEMPERATURE_VALUE_INDEX],
                         sensorValues[HUMIDITY_VALUE_INDEX]);
-*/
 
   curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_AIRQ_VALUE_INDEX);
   curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_HCHO_VALUE_INDEX);
