@@ -2,18 +2,14 @@
 #include"Arduino.h"
 
 AirQuality airqualitysensor;
-int current_quality = -1;
 
 void initAirQualitySensor() {
-  Console.println("initAirQualitySensor()");
   airqualitysensor.init(14);
 }
 
 int getSensorValueFromAirQualitySensor() {
-  Console.println("getSensorValueFromAirQualitySensor()");
   pinMode(AIRQ_SENSOR_ANALOG_PIN, INPUT);
-  current_quality = airqualitysensor.slope();
-  Console.println("current_quality=" + (String)current_quality);
+  int current_quality = airqualitysensor.slope();
   pinMode(AIRQ_SENSOR_ANALOG_PIN, OUTPUT);
   return current_quality;
 }
@@ -33,5 +29,4 @@ ISR(TIMER2_OVF_vect)
     airqualitysensor.counter++;
   }
 }
-
 

@@ -8,15 +8,7 @@
  *
  *  Written September 2015
 */
-#include <Bridge.h>
 #include <Console.h>
-#include <FileIO.h>
-#include <HttpClient.h>
-#include <Mailbox.h>
-#include <Process.h>
-#include <YunClient.h>
-#include <YunServer.h>
-
 #include "yeelinkclient.h"
 
 #define MQ2_SENSOR_ANALOG_PIN 'A0'
