@@ -10,7 +10,7 @@
  JST Pin 4 (Yellow wire) => Arduino Digital Pin 8
  */
 
-float dust_sensor_execute(int pin) {
+float dust_sensor_execute() {
   unsigned long duration;
   unsigned long starttime;
   unsigned long ratio = 0;
@@ -18,11 +18,11 @@ float dust_sensor_execute(int pin) {
   unsigned long lowpulseoccupancy = 0;
   unsigned long concentration = 0;
   
-  pinMode(pin, INPUT);
+  pinMode(DUST_SENSOR_DIGITAL_PIN, INPUT);
   
   starttime = millis();//get the current time;
   while (true) {
-    duration = pulseIn(pin, LOW);
+    duration = pulseIn(DUST_SENSOR_DIGITAL_PIN, LOW);
     if ((millis() - starttime) >= sampletime_ms) //if the sampel time == 30s
     {
       ratio = lowpulseoccupancy / (sampletime_ms * 10.0); // Integer percentage 0=>100
@@ -34,7 +34,7 @@ float dust_sensor_execute(int pin) {
     }
   }
   
-  pinMode(pin, OUTPUT);
+  pinMode(DUST_SENSOR_DIGITAL_PIN, OUTPUT);
   
   return concentration;
 }

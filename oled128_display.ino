@@ -1,5 +1,5 @@
+#include"SeeedOLED.h"
 #include <Wire.h>
-#include <SeeedOLED.h>
 #include <avr/pgmspace.h>
 
 const unsigned char TietoLogo[] PROGMEM = {

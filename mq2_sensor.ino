@@ -19,14 +19,14 @@ void initMQ2Sensor() {
 
 }
 
-float mq2_sensor_execute(int pin) {
+float mq2_sensor_execute() {
 
   Console.print("R0 = ");
   Console.println(MQ2_R0);
   float sensor_volt;
   float RS_gas; // Get value of RS in a GAS
   float ratio; // Get ratio RS_GAS/RS_air
-  float sensorValue = analogRead(A0);
+  float sensorValue = analogRead(MQ2_SENSOR_ANALOG_PIN);
   sensor_volt = (float)sensorValue / 1024 * 5.0;
   RS_gas = (5.0 - sensor_volt) / sensor_volt; // omit *RL
 

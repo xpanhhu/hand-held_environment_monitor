@@ -18,8 +18,8 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 void initDHTSensor() {
-  Serial.println("initTemperatureAndHumiditySensor()");
   Serial.begin(9600);
+  Serial.println("initDHTSensor()");
   dht.begin();
 }
 
