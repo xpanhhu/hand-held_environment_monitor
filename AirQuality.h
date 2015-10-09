@@ -1,9 +1,9 @@
 /*
   AirQuality library v1.0
   2010 Copyright (c) Seeed Technology Inc.  All right reserved.
- 
+
   Original Author: Bruce.Qin
-  
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
@@ -23,7 +23,7 @@
 #include"Arduino.h"
 class AirQuality
 {
-public:
+  public:
     int i ;
     long vol_standard;
     int init_voltage;
@@ -35,7 +35,7 @@ public:
     boolean error;
     void init(int pin);
     int slope(void);
-private:
+  private:
     int _pin;
     void avgVoltage(void);
 };

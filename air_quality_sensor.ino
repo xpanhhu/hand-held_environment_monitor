@@ -8,9 +8,7 @@ void initAirQualitySensor() {
 }
 
 int getSensorValueFromAirQualitySensor() {
-  pinMode(AIRQ_SENSOR_ANALOG_PIN, INPUT);
   int current_quality = airqualitysensor.slope();
-  pinMode(AIRQ_SENSOR_ANALOG_PIN, OUTPUT);
   return current_quality;
 }
 

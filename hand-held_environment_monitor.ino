@@ -44,7 +44,7 @@ void setup() {
 
 void loop() {
   displaySampling();
-  
+
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
   sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute();
   sensorValues[CH4_VALUE_INDEX] = mq2_sensor_execute();
@@ -59,7 +59,7 @@ void loop() {
                         sensorValues[TEMPERATURE_VALUE_INDEX],
                         sensorValues[HUMIDITY_VALUE_INDEX]);
 
-  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_AIRQ_VALUE_INDEX);
+  curlPostData(sensorValues[AIRQ_VALUE_INDEX], SENSOR_AIRQ_VALUE_INDEX);//to consider removing from web
   curlPostData(sensorValues[HCHO_VALUE_INDEX], SENSOR_HCHO_VALUE_INDEX);
   curlPostData(sensorValues[DUST_VALUE_INDEX], SENSOR_DUST_VALUE_INDEX);
   curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_CH4_VALUE_INDEX);

@@ -1,9 +1,9 @@
 /*
   SeeedOLED.h - SSD130x OLED Driver Library
   2011 Copyright (c) Seeed Technology Inc.  All right reserved.
- 
+
   Author: Visweswara R
-  
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
@@ -30,7 +30,6 @@
 #include <WProgram.h>
 #include "Wire.h"
 #endif
-
 
 
 #define SeeedOLED_Max_X 		127	//128 Pixels
@@ -66,39 +65,39 @@
 
 class SeeedOLED {
 
-public:
+  public:
 
-char addressingMode;
+    char addressingMode;
 
 
-void init(void);
+    void init(void);
 
-void setNormalDisplay();
-void setInverseDisplay();
+    void setNormalDisplay();
+    void setInverseDisplay();
 
-void sendCommand(unsigned char command);
-void sendData(unsigned char Data);
+    void sendCommand(unsigned char command);
+    void sendData(unsigned char Data);
 
-void setPageMode();
-void setHorizontalMode();
+    void setPageMode();
+    void setHorizontalMode();
 
-void setTextXY(unsigned char Row, unsigned char Column);
-void clearDisplay();
-void setBrightness(unsigned char Brightness);
-void putChar(unsigned char c);
-void putString(const char *String);
-unsigned char putNumber(long n);
-unsigned char putFloat(float floatNumber,unsigned char decimal);
-unsigned char putFloat(float floatNumber);
-void drawBitmap(unsigned char *bitmaparray,int bytes);
+    void setTextXY(unsigned char Row, unsigned char Column);
+    void clearDisplay();
+    void setBrightness(unsigned char Brightness);
+    void putChar(unsigned char c);
+    void putString(const char *String);
+    unsigned char putNumber(long n);
+    unsigned char putFloat(float floatNumber, unsigned char decimal);
+    unsigned char putFloat(float floatNumber);
+    void drawBitmap(unsigned char *bitmaparray, int bytes);
 
-void setHorizontalScrollProperties(bool direction,unsigned char startPage, unsigned char endPage, unsigned char scrollSpeed);
-void activateScroll();
-void deactivateScroll();
+    void setHorizontalScrollProperties(bool direction, unsigned char startPage, unsigned char endPage, unsigned char scrollSpeed);
+    void activateScroll();
+    void deactivateScroll();
 
 };
 
-extern SeeedOLED SeeedOled;  // SeeedOLED object 
+extern SeeedOLED SeeedOled;  // SeeedOLED object
 
 #endif
 
