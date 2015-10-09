@@ -1,9 +1,9 @@
 /*
   AirQuality library v1.0
   2010 Copyright (c) Seeed Technology Inc.  All right reserved.
- 
+
   Original Author: Bruce.Qin
-  
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
@@ -25,85 +25,85 @@
 
 void AirQuality::avgVoltage()
 {
-	if(i==150)//sum 5 minutes
-	{
-		vol_standard=temp/150; 
-		temp=0;
-		i=0;		
-	}
-    else 
-	{
-		temp+=first_vol;
-		i++;
-	}
+  if (i == 150) //sum 5 minutes
+  {
+    vol_standard = temp / 150;
+    temp = 0;
+    i = 0;
+  }
+  else
+  {
+    temp += first_vol;
+    i++;
+  }
 }
 void AirQuality::init(int pin)
 {
-    _pin=pin;
-    pinMode(_pin,INPUT);
-    unsigned char i=0;
-    delay(20000);//200000
-    init_voltage=analogRead(_pin);
-    while(init_voltage)
+  _pin = pin;
+  pinMode(_pin, INPUT);
+  unsigned char i = 0;
+  delay(20000);//200000
+  init_voltage = analogRead(_pin);
+  while (init_voltage)
+  {
+    if (init_voltage < 798 && init_voltage > 10) // the init voltage is ok
     {
-        if(init_voltage<798 && init_voltage>10)// the init voltage is ok
-        {
-            first_vol=analogRead(A0);//initialize first value
-            last_vol=first_vol;
-            vol_standard=last_vol;
-            error=false;;
-            break;
-        }
-        else if(init_voltage>798||init_voltage<=10)
-        {	
-            i++;
-            delay(60000);//60000
-            init_voltage=analogRead(A0);
-            if(i==5)
-            {
-                i=0;
-                error=true;
-            }
-          }
-        else 
-        break;
+      first_vol = analogRead(A2); //initialize first value
+      last_vol = first_vol;
+      vol_standard = last_vol;
+      error = false;;
+      break;
     }
-    //init the timer 
-    TCCR2A=0;//normal model
-    TCCR2B=0x07;//set clock as 1024*(1/16M)
-    TIMSK2=0x01;//enable overflow interrupt
-    sei();
+    else if (init_voltage > 798 || init_voltage <= 10)
+    {
+      i++;
+      delay(60000);//60000
+      init_voltage = analogRead(A2);
+      if (i == 5)
+      {
+        i = 0;
+        error = true;
+      }
+    }
+    else
+      break;
+  }
+  //init the timer
+  TCCR2A = 0; //normal model
+  TCCR2B = 0x07; //set clock as 1024*(1/16M)
+  TIMSK2 = 0x01; //enable overflow interrupt
+  sei();
 }
 int AirQuality::slope(void)
 {
-  while(timer_index)
-	{
-    	if(first_vol-last_vol>400||first_vol>700)
-        {
-            timer_index=0;	
-            avgVoltage();	
-            return 0;	
-        }
-    	else if((first_vol-last_vol>400&&first_vol<700)||first_vol-vol_standard>150)
-        {	      		
-            timer_index=0;	
-            avgVoltage();
-            return 1;
-            
-        }
-    	else if((first_vol-last_vol>200&&first_vol<700)||first_vol-vol_standard>50)
-        {	
-            timer_index=0;
-            avgVoltage();
-            return 2;	
-        }
-    	else
-        {
-            avgVoltage();	
-            timer_index=0;
-            return 3;
-        }
-	}
-    return -1;
+  while (timer_index)
+  {
+    if (first_vol - last_vol > 400 || first_vol > 700)
+    {
+      timer_index = 0;
+      avgVoltage();
+      return 0;
+    }
+    else if ((first_vol - last_vol > 400 && first_vol < 700) || first_vol - vol_standard > 150)
+    {
+      timer_index = 0;
+      avgVoltage();
+      return 1;
+
+    }
+    else if ((first_vol - last_vol > 200 && first_vol < 700) || first_vol - vol_standard > 50)
+    {
+      timer_index = 0;
+      avgVoltage();
+      return 2;
+    }
+    else
+    {
+      avgVoltage();
+      timer_index = 0;
+      return 3;
+    }
+  }
+  return -1;
 }
 
