@@ -14,7 +14,7 @@ void clientInit() {
   // Wait until a Console Monitor is connected.
   while (!Console);
 
-  Console.println("init finished.");
+  Console.println("Network init OK.");
 }
 
 String ftoa(float val, char resolution)

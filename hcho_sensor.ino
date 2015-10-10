@@ -26,8 +26,6 @@ float HCHO_sensor_execute() {
 
   //3, calculate mg/m3
   float mg = HCHO * ppm / 22.40 * 273 / (273 + TEMPERATURE);
-  Console.print("HCHO in mg: ");
-  Console.print(mg);
 
   //4, delay and return
   return mg;
