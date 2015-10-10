@@ -80,68 +80,42 @@ void initOled128Display()
   SeeedOled.setPageMode();           //Set addressing mode to Page Mode
   SeeedOled.setTextXY(0, 0);         //Set the cursor to Xth Page, Yth Column
   SeeedOled.drawBitmap((unsigned char*)TietoLogo, 1024);    // 1024 = 128 Pixels * 64 Pixels / 8
-  delay(2000);
-  SeeedOled.clearDisplay();
 }
 
 void displaySampling()
 {
+  SeeedOled.clearDisplay();
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("AIR SAMPLING...");
 }
 
 void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, float temperature, float humidity)
 {
-  Console.println("displayAnalysisResult()");
-  Console.println("airQuality=" + (String)airQuality);
-  Console.println("dust=" + (String)dust);
-  Console.println("hcho=" + (String)hcho);
-  Console.println("ch4=" + (String)ch4);
-  Console.println("temperature=" + (String)temperature);
-  Console.println("humidity=" + (String)humidity);
-
-  clearCurrentDisplay(0);
+  SeeedOled.clearDisplay();
 
   //page 1
-  displayHeader();
-  displayTemperature(temperature);
-  displayHumidity(humidity);
-  displayFooter(1);
-  clearCurrentDisplay(4000);
-
-  //page 2
-  displayHeader();
-  displayAirQuality(airQuality);
-  displayDust(dust);
-  displayFooter(1);
-  clearCurrentDisplay(4000);
-
-  //page 3
-  displayHeader();
-  displayHcho(hcho);
-  displayCh4(ch4);
-  displayFooter(2);
-  clearCurrentDisplay(4000);
-}
-
-void displayTemperature(float temperature)
-{
+  SeeedOled.setTextXY(0, 0);
+  SeeedOled.putString("----------------");
   SeeedOled.setTextXY(1, 0);
-  SeeedOled.putString("Temperature(C)");
+  SeeedOled.putString("Temp(C)");
   SeeedOled.setTextXY(2, 0);
   SeeedOled.putFloat(temperature);
-}
-
-void displayHumidity(float humidity)
-{
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("Humidity(%)");
   SeeedOled.setTextXY(5, 0);
   SeeedOled.putFloat(humidity);
-}
+  SeeedOled.setTextXY(6, 0);
+  SeeedOled.putString("----------------");
+  SeeedOled.setTextXY(7, 0);
+  SeeedOled.putString("        PAGE ");
+  SeeedOled.putNumber(1);
+  SeeedOled.putString("/3");
+  delay(4000);
+  SeeedOled.clearDisplay();
 
-void displayAirQuality(int airQuality)
-{
+  //page 2
+  SeeedOled.setTextXY(0, 0);
+  SeeedOled.putString("----------------");
   SeeedOled.setTextXY(1, 0);
   SeeedOled.putString("AIR QUALITY");
   SeeedOled.setTextXY(2, 0);
@@ -161,53 +135,37 @@ void displayAirQuality(int airQuality)
     default:
       break;
   }
-}
-
-void displayDust(float dust)
-{
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("Dust(pcs/0.01cf)");
   SeeedOled.setTextXY(5, 0);
   SeeedOled.putFloat(dust);
-}
-
-void displayCh4(float ch4)
-{
-  SeeedOled.setTextXY(1, 0);
-  SeeedOled.putString("CH4(ppm)");
-  SeeedOled.setTextXY(2, 0);
-  SeeedOled.putFloat(ch4);
-}
-
-void displayHcho(float hcho)
-{
-  SeeedOled.setTextXY(4, 0);
-  SeeedOled.putString("HCHO(mg/m3)");
-  SeeedOled.setTextXY(5, 0);
-  SeeedOled.putFloat(hcho);
-}
-
-void displayHeader() {
-  SeeedOled.setTextXY(0, 0);
-  SeeedOled.putString("----------------");
-}
-
-void displayFooter(int pageSize)
-{
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
-  SeeedOled.putNumber(pageSize);
+  SeeedOled.putNumber(2);
   SeeedOled.putString("/3");
-}
+  delay(4000);
+  SeeedOled.clearDisplay();
 
-void clearCurrentDisplay(long delayMs)
-{
-  if (delayMs > 0)
-  {
-    delay(delayMs);
-  }
+  //page 3
+  SeeedOled.setTextXY(0, 0);
+  SeeedOled.putString("----------------");
+  SeeedOled.setTextXY(4, 0);
+  SeeedOled.putString("HCHO(mg/m3)");
+  SeeedOled.setTextXY(5, 0);
+  SeeedOled.putFloat(hcho);
+  SeeedOled.setTextXY(1, 0);
+  SeeedOled.putString("CH4(ppm)");
+  SeeedOled.setTextXY(2, 0);
+  SeeedOled.putFloat(ch4);
+  SeeedOled.setTextXY(6, 0);
+  SeeedOled.putString("----------------");
+  SeeedOled.setTextXY(7, 0);
+  SeeedOled.putString("        PAGE ");
+  SeeedOled.putNumber(3);
+  SeeedOled.putString("/3");
+  delay(4000);
   SeeedOled.clearDisplay();
 }
 
