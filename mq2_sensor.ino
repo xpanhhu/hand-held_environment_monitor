@@ -32,5 +32,6 @@ float mq2_sensor_execute() {
 
   Console.print("Rs/R0 = ");
   Console.println(ratio);
-  return CH4_PPM * 16 / 22.4 * 273 / (273 + 25);
+  //return CH4_PPM * 16 / 22.4 * 273 / (273 + 25);
+  return CH4_PPM;
 }
