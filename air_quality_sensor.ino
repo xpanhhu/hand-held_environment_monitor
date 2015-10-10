@@ -9,6 +9,9 @@ void initAirQualitySensor() {
 
 int getSensorValueFromAirQualitySensor() {
   int current_quality = airqualitysensor.slope();
+  if (current_quality = -1) {
+    current_quality = 0;
+  }
   return current_quality;
 }
 
