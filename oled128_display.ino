@@ -166,6 +166,5 @@ void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, fl
   SeeedOled.putNumber(3);
   SeeedOled.putString("/3");
   delay(4000);
-  SeeedOled.clearDisplay();
 }
 
