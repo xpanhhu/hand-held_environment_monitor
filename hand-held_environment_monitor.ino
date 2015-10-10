@@ -9,10 +9,14 @@
  *  Written September 2015
 */
 #include <Console.h>
+#include "SerialLog.h"
 #include "yeelinkclient.h"
 #include "hand-held_environment_monitor.h"
 
 void setup() {
+#ifdef DEBUG
+  Serial.begin(9600);
+#endif
   clientInit();
   initOled128Display();//Due to resource limit, OLED and Network output should be seperated.
   initAirQualitySensor();
@@ -21,9 +25,11 @@ void setup() {
 }
 
 void loop() {
+  LOG_PRINTLN("loop()");
+
   displaySampling();
 
-  float sensorValues[6];
+  float sensorValues[SENSOR_VALUES_LEN];
   sensorValues[AIRQ_VALUE_INDEX] = getSensorValueFromAirQualitySensor();
   sensorValues[DUST_VALUE_INDEX] = dust_sensor_execute();
   sensorValues[CH4_VALUE_INDEX] = mq2_sensor_execute();
@@ -44,7 +50,6 @@ void loop() {
   curlPostData(sensorValues[CH4_VALUE_INDEX], SENSOR_CH4_VALUE_INDEX);
   curlPostData(sensorValues[TEMPERATURE_VALUE_INDEX], SENSOR_CH4_VALUE_INDEX);
   curlPostData(sensorValues[HUMIDITY_VALUE_INDEX], SENSOR_HUMIDITY_VALUE_INDEX);
-
+  
   delay(10000);
 }
-

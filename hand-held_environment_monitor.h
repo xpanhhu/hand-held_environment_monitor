@@ -1,7 +1,7 @@
 #ifndef HAND_HELD_ENV_MONITOR_H
 #define HAND_HELD_ENV_MONITOR_H
-#include"hand-held_environment_monitor.h"
 
+#define SENSOR_VALUES_LEN 6
 #define MQ2_SENSOR_ANALOG_PIN 'A0'
 #define HCHO_SENSOR_ANALOG_PIN 'A1'
 #define AIRQ_SENSOR_ANALOG_PIN 'A2'

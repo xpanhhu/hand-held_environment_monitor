@@ -1,4 +1,4 @@
-#include"SeeedOLED.h"
+#include "SeeedOLED.h"
 #include <Wire.h>
 #include <avr/pgmspace.h>
 
