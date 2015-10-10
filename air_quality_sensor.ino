@@ -3,16 +3,15 @@
 
 AirQuality airqualitysensor;
 
-void initAirQualitySensor() {
+void initAirQualitySensor()
+{
+  LOG_PRINTLN("initAirQualitySensor()");
   airqualitysensor.init(14);
 }
 
-int getSensorValueFromAirQualitySensor() {
-  int current_quality = airqualitysensor.slope();
-  if (current_quality = -1) {
-    current_quality = 0;
-  }
-  return current_quality;
+int getAQIFromAirQualitySensor() {
+  LOG_PRINTLN("getSensorValueFromAirQualitySensor()");
+  return airqualitysensor.slope();
 }
 
 ISR(TIMER2_OVF_vect)

@@ -4,7 +4,7 @@
 #include "yeelinkclient.h"
 
 
-void clientInit() {
+void initYeelinkClient() {
   // Initialize Bridge
   Bridge.begin();
 
@@ -51,7 +51,8 @@ String ftoa(float val, char resolution)
   return result;
 }
 
-void curlPostData(float dataParam, String sensorId, String deviceId) {
+void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId) 
+{
   // Launch "curl" command and get Arduino ascii art logo from the network
   // curl is command line program for transferring data using different internet protocols
   Process p;        // Create a process and call it "p"

@@ -10,7 +10,7 @@
  JST Pin 4 (Yellow wire) => Arduino Digital Pin 8
  */
 
-float dust_sensor_execute() {
+float getDustFromDustSensor() {
   unsigned long duration;
   unsigned long starttime;
   unsigned long ratio = 0;

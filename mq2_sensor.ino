@@ -15,7 +15,7 @@ void initMQ2Sensor() {
   MQ2_R0 = RS_air; // The ratio of RS/R0 is 10 in a clear air
 }
 
-float mq2_sensor_execute() {
+float getCH4FromMQ2Sensor() {
   float sensor_volt;
   float RS_gas; // Get value of RS in a GAS
   float ratio; // Get ratio RS_GAS/RS_air

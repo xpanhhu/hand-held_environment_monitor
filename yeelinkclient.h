@@ -7,8 +7,8 @@
 
 #define DEVICE_ID "340732"//hand-held_environment_monitor
 
-void clientInit();
+void initYeelinkClient();
 
-void curlPostData(float dataParam, String sensorId, String deviceId = DEVICE_ID);
+void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId = DEVICE_ID);
 
 #endif

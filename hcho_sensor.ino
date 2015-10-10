@@ -16,7 +16,7 @@
 #define C2H6O 46.0700
 #define HCHO 30.0300
 
-float HCHO_sensor_execute() {
+float getHCHOFromHCHOSensor() {
   //1, read the sensor and covert sensor value
   int sensorValue = analogRead(HCHO_SENSOR_ANALOG_PIN);
   float VRL = sensorValue * 4.95 / 1023;

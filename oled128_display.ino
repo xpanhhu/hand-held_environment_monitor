@@ -71,6 +71,7 @@ const unsigned char TietoLogo[] PROGMEM = {
 
 void initOled128Display()
 {
+  LOG_PRINTLN("initOled128Display()");
   Wire.begin();
   SeeedOled.init();  //initialze SEEED OLED display
   DDRB |= 0x21;
@@ -84,13 +85,15 @@ void initOled128Display()
 
 void displaySampling()
 {
+  LOG_PRINTLN("displaySampling()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("AIR SAMPLING...");
 }
 
-void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, float temperature, float humidity)
+void displaySensorData(float sensordata[])
 {
+  LOG_PRINTLN("displaySensorData()");
   SeeedOled.clearDisplay();
 
   //page 1
@@ -99,11 +102,11 @@ void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, fl
   SeeedOled.setTextXY(1, 0);
   SeeedOled.putString("Temp(C)");
   SeeedOled.setTextXY(2, 0);
-  SeeedOled.putFloat(temperature);
+  SeeedOled.putFloat(sensordata[TEMPERATURE_DATA_INDEX]);
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("Humidity(%)");
   SeeedOled.setTextXY(5, 0);
-  SeeedOled.putFloat(humidity);
+  SeeedOled.putFloat(sensordata[HUMIDITY_DATA_INDEX]);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
@@ -119,6 +122,7 @@ void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, fl
   SeeedOled.setTextXY(1, 0);
   SeeedOled.putString("AIR QUALITY");
   SeeedOled.setTextXY(2, 0);
+  int airQuality = int(sensordata[AIRQ_DATA_INDEX]);
   switch (airQuality) {
     case 0:
       SeeedOled.putString("Hazardous");
@@ -133,12 +137,13 @@ void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, fl
       SeeedOled.putString("Good");
       break;
     default:
+      SeeedOled.putString("Invaid");
       break;
   }
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("Dust(pcs/0.01cf)");
   SeeedOled.setTextXY(5, 0);
-  SeeedOled.putFloat(dust);
+  SeeedOled.putFloat(sensordata[DUST_DATA_INDEX]);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
@@ -154,11 +159,11 @@ void displayAnalysisResult(int airQuality, float dust, float hcho, float ch4, fl
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("HCHO(mg/m3)");
   SeeedOled.setTextXY(5, 0);
-  SeeedOled.putFloat(hcho);
+  SeeedOled.putFloat(sensordata[HCHO_DATA_INDEX]);
   SeeedOled.setTextXY(1, 0);
   SeeedOled.putString("CH4(ppm)");
   SeeedOled.setTextXY(2, 0);
-  SeeedOled.putFloat(ch4);
+  SeeedOled.putFloat(sensordata[CH4_DATA_INDEX]);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);

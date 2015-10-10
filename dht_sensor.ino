@@ -7,6 +7,7 @@
 DHT dht(DHT_SENSOR_DIGITAL_PIN, DHTTYPE);
 
 void initDHTSensor() {
+  LOG_PRINTLN("initDHTSensor()");
   dht.begin();
 }
 
@@ -14,6 +15,7 @@ void initDHTSensor() {
 // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
 float getTemperatureFromDHTSensor()
 {
+  LOG_PRINTLN("getTemperatureFromDHTSensor()");
   float t = dht.readTemperature();
   if (isnan(t))
   {
@@ -24,6 +26,7 @@ float getTemperatureFromDHTSensor()
 
 float getHumidityFromDHTSensor()
 {
+  LOG_PRINTLN("getHumidityFromDHTSensor()");
   float h = dht.readHumidity();
   if (isnan(h))
   {
