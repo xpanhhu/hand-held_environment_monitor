@@ -2,10 +2,9 @@
 // Written by ladyada, public domain
 
 #include "DHT.h"
-#define DHTPIN 2     // what pin we're connected to
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
 
-DHT dht(DHTPIN, DHTTYPE);
+DHT dht(DHT_SENSOR_DIGITAL_PIN, DHTTYPE);
 
 void initDHTSensor() {
   dht.begin();
