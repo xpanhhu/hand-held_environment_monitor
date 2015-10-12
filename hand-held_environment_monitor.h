@@ -10,7 +10,8 @@
 #define DHT_SENSOR_ENABLED
 #define AIRQ_SENSOR_ENABLED
 
-#define DEBUG // Comment out this line code if need to close debug log
+// Comment out the DEBUG if need to close debug log
+// #define DEBUG
 
 #ifdef DEBUG
 #define LOG_PRINT(str)\

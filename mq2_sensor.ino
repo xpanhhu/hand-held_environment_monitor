@@ -1,6 +1,7 @@
 float MQ2_R0;
 
 void initMQ2Sensor() {
+  LOG_PRINTLN("initMQ2Sensor()");
   float sensor_volt;
   float RS_air; //  Get the value of RS via in a clear air
   float sensorValue;
@@ -16,6 +17,7 @@ void initMQ2Sensor() {
 }
 
 float getCH4FromMQ2Sensor() {
+  LOG_PRINTLN("getCH4FromMQ2Sensor()");
   float sensor_volt;
   float RS_gas; // Get value of RS in a GAS
   float ratio; // Get ratio RS_GAS/RS_air

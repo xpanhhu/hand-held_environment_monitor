@@ -17,6 +17,7 @@
 #define HCHO 30.0300
 
 float getHCHOFromHCHOSensor() {
+  LOG_PRINTLN("getHCHOFromHCHOSensor()");
   //1, read the sensor and covert sensor value
   int sensorValue = analogRead(HCHO_SENSOR_ANALOG_PIN);
   float VRL = sensorValue * 4.95 / 1023;

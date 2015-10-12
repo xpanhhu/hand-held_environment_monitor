@@ -11,6 +11,7 @@
  */
 
 float getDustFromDustSensor() {
+  LOG_PRINTLN("getDustFromDustSensor()");
   unsigned long duration;
   unsigned long starttime;
   unsigned long ratio = 0;

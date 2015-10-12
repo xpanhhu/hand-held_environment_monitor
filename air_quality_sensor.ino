@@ -10,7 +10,7 @@ void initAirQualitySensor()
 }
 
 int getAQIFromAirQualitySensor() {
-  LOG_PRINTLN("getSensorValueFromAirQualitySensor()");
+  LOG_PRINTLN("getAQIFromAirQualitySensor()");
   return airqualitysensor.slope();
 }
 
