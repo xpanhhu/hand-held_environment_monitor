@@ -4,7 +4,6 @@
 // Comment out the code if need to disable a component
 #define OLED_ENABLED
 #define NETWORK_ENABLED
-#define CONSOLE_ENABLED
 #define DUST_SENSOR_ENABLED
 #define HCHO_SENSOR_ENABLED
 #define MQ2_SENSOR_ENABLED

@@ -7,6 +7,9 @@
 
 #define DEVICE_ID "340732"//hand-held_environment_monitor
 
+// Comment out the CONSOLE DEBUG if need to close debug log
+//#define CONSOLE_ENABLED
+
 void initYeelinkClient();
 
 void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId = DEVICE_ID);
