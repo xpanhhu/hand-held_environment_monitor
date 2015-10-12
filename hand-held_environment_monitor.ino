@@ -32,11 +32,14 @@ void setup() {
 #ifdef DHT_SENSOR_ENABLED
   initDHTSensor();
 #endif
+#ifdef BUZZER_ENABLED
+  initBuzzer();
+#endif
 }
 
 void loop() {
   LOG_PRINTLN("loop()");
-
+  
 // data sampling
 #ifdef OLED_ENABLED
   displaySampling();

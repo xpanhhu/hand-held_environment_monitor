@@ -4,6 +4,7 @@
 // Comment out the code if need to disable a component
 #define OLED_ENABLED
 #define NETWORK_ENABLED
+#define BUZZER_ENABLED
 #define DUST_SENSOR_ENABLED
 #define HCHO_SENSOR_ENABLED
 #define MQ2_SENSOR_ENABLED
@@ -12,7 +13,6 @@
 
 // Comment out the DEBUG if need to close debug log
 // #define DEBUG
-
 #ifdef DEBUG
 #define LOG_PRINT(str)\
   Serial.print(str)
@@ -28,6 +28,7 @@
 #define AIRQ_SENSOR_ANALOG_PIN 'A2'
 
 #define DHT_SENSOR_DIGITAL_PIN 2
+#define BUZZER_DIGITAL_PIN 5
 #define DUST_SENSOR_DIGITAL_PIN 8
 
 #define SENSOR_DATA_LEN 6
