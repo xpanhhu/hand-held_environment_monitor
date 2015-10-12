@@ -13,9 +13,9 @@
 #include "hand-held_environment_monitor.h"
 
 void setup() {
-  LOG_PRINTLN("setup()");
-#ifdef DEBUG
+#ifdef SERIAL_LOG_ENABLE
   Serial.begin(9600);
+  LOG_PRINTLN("setup()");
 #endif
 #ifdef NETWORK_ENABLED
   initYeelinkClient();
@@ -67,7 +67,6 @@ void loop() {
 // display sensor data in oled
 #ifdef OLED_ENABLED
   displaySensorData(sensorData);
-
   displaySampling();
 #endif
 

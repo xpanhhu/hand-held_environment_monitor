@@ -11,9 +11,9 @@
 #define DHT_SENSOR_ENABLED
 #define AIRQ_SENSOR_ENABLED
 
-// Comment out the DEBUG if need to close debug log
-// #define DEBUG
-#ifdef DEBUG
+// Comment out the SERIAL_LOG_ENABLE if need to close debug log
+// #define SERIAL_LOG_ENABLE
+#ifdef SERIAL_LOG_ENABLE
 #define LOG_PRINT(str)\
   Serial.print(str)
 #define LOG_PRINTLN(str)\
