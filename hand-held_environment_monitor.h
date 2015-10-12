@@ -1,8 +1,26 @@
 #ifndef HAND_HELD_ENV_MONITOR_H
 #define HAND_HELD_ENV_MONITOR_H
 
-#define NOT_USE_OLED  //used for Debug
-#define NOT_USE_NETWORK
+// Comment out the code if need to disable a component
+#define OLED_ENABLED
+#define NETWORK_ENABLED
+#define DUST_SENSOR_ENABLED
+#define HCHO_SENSOR_ENABLED
+#define MQ2_SENSOR_ENABLED
+#define DHT_SENSOR_ENABLED
+#define AIRQ_SENSOR_ENABLED
+
+#define DEBUG // Comment out this line code if need to close debug log
+
+#ifdef DEBUG
+#define LOG_PRINT(str)\
+  Serial.print(str)
+#define LOG_PRINTLN(str)\
+  Serial.println(str)
+#else
+#define LOG_PRINT(str)
+#define LOG_PRINTLN(str)
+#endif
 
 #define MQ2_SENSOR_ANALOG_PIN 'A0'
 #define HCHO_SENSOR_ANALOG_PIN 'A1'

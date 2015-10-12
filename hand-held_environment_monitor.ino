@@ -9,7 +9,6 @@
  *  Written September 2015
 */
 #include <Console.h>
-#include "SerialLog.h"
 #include "yeelinkclient.h"
 #include "hand-held_environment_monitor.h"
 
@@ -18,39 +17,57 @@ void setup() {
 #ifdef DEBUG
   Serial.begin(9600);
 #endif
-
-#ifndef NOT_USE_NETWORK
+#ifdef NETWORK_ENABLED
   initYeelinkClient();
 #endif
-
-#ifndef NOT_USE_OLED
+#ifdef OLED_ENABLED
   initOled128Display();//Due to resource limit, OLED and Network output should be seperated.
 #endif
+#ifdef AIRQ_SENSOR_ENABLED
   initAirQualitySensor();
+#endif
+#ifdef MQ2_SENSOR_ENABLED
   initMQ2Sensor();
+#endif
+#ifdef DHT_SENSOR_ENABLED
   initDHTSensor();
+#endif
 }
 
 void loop() {
   LOG_PRINTLN("loop()");
 
-#ifndef NOT_USE_OLED
+// data sampling
+#ifdef OLED_ENABLED
   displaySampling();
 #endif
-
+  
+// get sensor data from sensor
   float sensorData[SENSOR_DATA_LEN];
+#ifdef AIRQ_SENSOR_ENABLED
   sensorData[AIRQ_DATA_INDEX] = getAQIFromAirQualitySensor();
+#endif
+#ifdef DHT_SENSOR_ENABLED
   sensorData[DUST_DATA_INDEX] = getDustFromDustSensor();
+#endif
+#ifdef MQ2_SENSOR_ENABLED
   sensorData[CH4_DATA_INDEX] = getCH4FromMQ2Sensor();
+#endif
+#ifdef HCHO_SENSOR_ENABLED
   sensorData[HCHO_DATA_INDEX] = getHCHOFromHCHOSensor();
+#endif
+#ifdef DHT_SENSOR_ENABLED
   sensorData[TEMPERATURE_DATA_INDEX] = getTemperatureFromDHTSensor();
   sensorData[HUMIDITY_DATA_INDEX] = getHumidityFromDHTSensor();
+#endif
 
-#ifndef NOT_USE_OLED
+// display sensor data in oled
+#ifdef OLED_ENABLED
   displaySensorData(sensorData);
 #endif
 
-#ifndef NOT_USE_NETWORK
+// send sensor data to yeelink server
+#ifdef NETWORK_ENABLED
   sendSensorDataToYeelink(sensorData[AIRQ_DATA_INDEX], SENSOR_AIRQ_DATA_INDEX);//to consider removing from web
   sendSensorDataToYeelink(sensorData[HCHO_DATA_INDEX], SENSOR_HCHO_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[DUST_DATA_INDEX], SENSOR_DUST_DATA_INDEX);
