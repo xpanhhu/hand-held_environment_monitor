@@ -21,7 +21,7 @@ void setup() {
   initYeelinkClient();
 #endif
 #ifdef OLED_ENABLED
-  initOled128Display();//Due to resource limit, OLED and Network output should be seperated.
+  initOled128Display();
 #endif
 #ifdef AIRQ_SENSOR_ENABLED
   initAirQualitySensor();
@@ -72,11 +72,11 @@ void loop() {
 
 // send sensor data to yeelink server
 #ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(sensorData[AIRQ_DATA_INDEX], SENSOR_AIRQ_DATA_INDEX);//to consider removing from web
+  sendSensorDataToYeelink(sensorData[AIRQ_DATA_INDEX], SENSOR_AIRQ_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[HCHO_DATA_INDEX], SENSOR_HCHO_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[DUST_DATA_INDEX], SENSOR_DUST_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[CH4_DATA_INDEX], SENSOR_CH4_DATA_INDEX);
-  sendSensorDataToYeelink(sensorData[TEMPERATURE_DATA_INDEX], SENSOR_CH4_DATA_INDEX);
+  sendSensorDataToYeelink(sensorData[TEMPERATURE_DATA_INDEX], SENSOR_TEMPERATURE_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[HUMIDITY_DATA_INDEX], SENSOR_HUMIDITY_DATA_INDEX);
 #endif
   
