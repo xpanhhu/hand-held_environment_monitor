@@ -8,6 +8,7 @@ void initYeelinkClient() {
   // Initialize Bridge
   Bridge.begin();
 
+#ifdef CONSOLE_ENABLED
   // Initialize Console
   Console.begin();
 
@@ -15,6 +16,7 @@ void initYeelinkClient() {
   while (!Console);
 
   Console.println("Network init OK.");
+#endif
 }
 
 String ftoa(float val, char resolution)
@@ -51,7 +53,7 @@ String ftoa(float val, char resolution)
   return result;
 }
 
-void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId) 
+void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
 {
   // Launch "curl" command and get Arduino ascii art logo from the network
   // curl is command line program for transferring data using different internet protocols
@@ -70,16 +72,21 @@ void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
   param += "/sensor/";
   param += sensorId;
   param += "/datapoints";
+
+#ifdef CONSOLE_ENABLED
   Console.println("param = " + param);
+#endif
   p.runShellCommandAsynchronously(param);
 
   // Print arduino logo over the Console
   // A process output can be read with the stream methods
+#ifdef CONSOLE_ENABLED
   while (p.available() > 0) {
     char c = p.read();
     Console.print(c);
   }
   // Ensure the last bit of data is sent.
   Console.flush();
+#endif
 }
 
