@@ -64,6 +64,8 @@ void loop() {
 // display sensor data in oled
 #ifdef OLED_ENABLED
   displaySensorData(sensorData);
+
+  displaySampling();
 #endif
 
 // send sensor data to yeelink server
