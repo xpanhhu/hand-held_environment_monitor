@@ -10,6 +10,7 @@
 #define MQ2_SENSOR_ENABLED
 #define DHT_SENSOR_ENABLED
 #define AIRQ_SENSOR_ENABLED
+#define ALARM_ENABLED
 
 // Comment out the SERIAL_LOG_ENABLE if need to close debug log
 // #define SERIAL_LOG_ENABLE
@@ -52,7 +53,8 @@
 #define SENSOR_AIRQ_DATA_INDEX "377542"//Air quality
 #define SENSOR_CH4_DATA_INDEX "377887"//CH4
 #define SENSOR_TEMPERATURE_DATA_INDEX "377543"//Temperature
-#define SENSOR_HUMIDITY_DATA_INDEX "377933" //Humidity
+#define SENSOR_HUMIDITY_DATA_INDEX "377933" //Humidity 
+#define SENSOR_BUZZER_DATA_INDEX "378115" //BUZZER
 
 #endif
 

@@ -52,19 +52,25 @@ void loop() {
   float sensorData[SENSOR_DATA_LEN];
 #ifdef AIRQ_SENSOR_ENABLED
   sensorData[AIRQ_DATA_INDEX] = getAQIFromAirQualitySensor();
+  playAlarm(AIRQ_DATA_INDEX, sensorData[AIRQ_DATA_INDEX]);
 #endif
 #ifdef DHT_SENSOR_ENABLED
   sensorData[DUST_DATA_INDEX] = getDustFromDustSensor();
+  playAlarm(DUST_DATA_INDEX, sensorData[DUST_DATA_INDEX]);
 #endif
 #ifdef MQ2_SENSOR_ENABLED
   sensorData[CH4_DATA_INDEX] = getCH4FromMQ2Sensor();
+  playAlarm(CH4_DATA_INDEX, sensorData[CH4_DATA_INDEX]);
 #endif
 #ifdef HCHO_SENSOR_ENABLED
   sensorData[HCHO_DATA_INDEX] = getHCHOFromHCHOSensor();
+  playAlarm(HCHO_DATA_INDEX, sensorData[HCHO_DATA_INDEX]);
 #endif
 #ifdef DHT_SENSOR_ENABLED
   sensorData[TEMPERATURE_DATA_INDEX] = getTemperatureFromDHTSensor();
   sensorData[HUMIDITY_DATA_INDEX] = getHumidityFromDHTSensor();
+  playAlarm(TEMPERATURE_DATA_INDEX, sensorData[TEMPERATURE_DATA_INDEX]);
+  playAlarm(HUMIDITY_DATA_INDEX, sensorData[HUMIDITY_DATA_INDEX]);
 #endif
 
   // display sensor data in oled
@@ -81,10 +87,6 @@ void loop() {
   sendSensorDataToYeelink(sensorData[CH4_DATA_INDEX], SENSOR_CH4_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[TEMPERATURE_DATA_INDEX], SENSOR_TEMPERATURE_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[HUMIDITY_DATA_INDEX], SENSOR_HUMIDITY_DATA_INDEX);
-#endif
-
-#ifdef ALARM_ENABLED
-  playAlarm(AIRQ_DATA_INDEX, sensorData[AIRQ_DATA_INDEX]);
 #endif
 
   delay(10000);
