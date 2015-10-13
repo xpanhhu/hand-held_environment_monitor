@@ -23,6 +23,14 @@
 #define LOG_PRINTLN(str)
 #endif
 
+#define MEMORY_CHECK_ENABLE//check free memory
+#if (defined MEMORY_CHECK_ENABLE) && (defined CONSOLE_ENABLED)
+#define FREE_MEMORY()\
+  Console.println(freeMemory())
+#else
+#define FREE_MEMORY()
+#endif
+
 #define MQ2_SENSOR_ANALOG_PIN 'A0'
 #define HCHO_SENSOR_ANALOG_PIN 'A1'
 #define AIRQ_SENSOR_ANALOG_PIN 'A2'

@@ -9,6 +9,7 @@
  *  Written September 2015
 */
 #include <Console.h>
+#include "MemoryFree.h"
 #include "yeelinkclient.h"
 #include "hand-held_environment_monitor.h"
 
@@ -39,6 +40,8 @@ void setup() {
 
 void loop() {
   LOG_PRINTLN("loop()");
+
+  FREE_MEMORY();
 
   // data sampling
 #ifdef OLED_ENABLED
