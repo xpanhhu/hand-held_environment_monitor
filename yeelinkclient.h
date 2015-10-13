@@ -14,4 +14,6 @@ void initYeelinkClient();
 
 void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId = DEVICE_ID);
 
+float getSensorDataFromYeelink(String key, String sensorId, String deviceId = DEVICE_ID);
+
 #endif

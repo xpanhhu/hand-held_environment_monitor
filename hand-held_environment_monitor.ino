@@ -39,13 +39,13 @@ void setup() {
 
 void loop() {
   LOG_PRINTLN("loop()");
-  
-// data sampling
+
+  // data sampling
 #ifdef OLED_ENABLED
   displaySampling();
 #endif
-  
-// get sensor data from sensor
+
+  // get sensor data from sensor
   float sensorData[SENSOR_DATA_LEN];
 #ifdef AIRQ_SENSOR_ENABLED
   sensorData[AIRQ_DATA_INDEX] = getAQIFromAirQualitySensor();
@@ -64,13 +64,13 @@ void loop() {
   sensorData[HUMIDITY_DATA_INDEX] = getHumidityFromDHTSensor();
 #endif
 
-// display sensor data in oled
+  // display sensor data in oled
 #ifdef OLED_ENABLED
   displaySensorData(sensorData);
   displaySampling();
 #endif
 
-// send sensor data to yeelink server
+  // send sensor data to yeelink server
 #ifdef NETWORK_ENABLED
   sendSensorDataToYeelink(sensorData[AIRQ_DATA_INDEX], SENSOR_AIRQ_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[HCHO_DATA_INDEX], SENSOR_HCHO_DATA_INDEX);
@@ -79,7 +79,11 @@ void loop() {
   sendSensorDataToYeelink(sensorData[TEMPERATURE_DATA_INDEX], SENSOR_TEMPERATURE_DATA_INDEX);
   sendSensorDataToYeelink(sensorData[HUMIDITY_DATA_INDEX], SENSOR_HUMIDITY_DATA_INDEX);
 #endif
-  
+
+#ifdef ALARM_ENABLED
+  playAlarm(AIRQ_DATA_INDEX, sensorData[AIRQ_DATA_INDEX]);
+#endif
+
   delay(10000);
-  
+
 }

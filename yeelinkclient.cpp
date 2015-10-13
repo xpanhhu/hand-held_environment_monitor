@@ -90,3 +90,39 @@ void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
 #endif
 }
 
+float getSensorDataFromYeelink(String key, String sensorId, String deviceId)
+{
+  Process p;        // Create a process and call it "p"
+  //command is like ("curl -H U-ApiKey:6259afea8328804a22589aa3c8267512 http://api.yeelink.net/v1.0/device/340732/sensor/377542/datapoints/key");
+
+  String param = "curl ";
+  param += " -H U-ApiKey:";
+  param += API_KEY;
+  param += " http://api.yeelink.net/v1.0/device/";
+  param += deviceId;
+  param += "/sensor/";
+  param += sensorId;
+  param += "/datapoints/";
+  if (key != NULL) {
+    param += key;
+  }
+
+#ifdef CONSOLE_ENABLED
+  Console.println("param = " + param);
+#endif
+  p.runShellCommandAsynchronously(param);
+
+  // Print arduino logo over the Console
+  // A process output can be read with the stream methods
+#ifdef CONSOLE_ENABLED
+  while (p.available() > 0) {
+    char c = p.read();
+    Console.print(c);
+  }
+  // Ensure the last bit of data is sent.
+  Console.flush();
+#endif
+
+  return 1;
+}
+
