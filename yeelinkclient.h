@@ -8,12 +8,25 @@
 #define DEVICE_ID "340732"//hand-held_environment_monitor
 
 // Comment out the CONSOLE DEBUG if need to close debug log
-//#define CONSOLE_ENABLED
+#define CONSOLE_ENABLED
+
+#ifdef CONSOLE_ENABLED
+#define CONSOLE_PRINT(str)\
+  Console.print(str)
+#define CONSOLE_PRINTLN(str)\
+  Console.println(str)
+#define CONSOLE_FLUSH()\
+  Console.flush()
+#else
+#define CONSOLE_PRINT(str)
+#define CONSOLE_PRINTLN(str)
+#define CONSOLE_FLUSH()
+#endif
 
 void initYeelinkClient();
 
 void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId = DEVICE_ID);
 
-float getSensorDataFromYeelink(String key, String sensorId, String deviceId = DEVICE_ID);
+String getSensorDataFromYeelink(String key, String sensorId, String deviceId = DEVICE_ID);
 
 #endif

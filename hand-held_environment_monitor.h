@@ -13,6 +13,7 @@
 
 // Comment out the SERIAL_LOG_ENABLE if need to close debug log
 //#define SERIAL_LOG_ENABLE
+
 #ifdef SERIAL_LOG_ENABLE
 #define LOG_PRINT(str)\
   Serial.print(str)
@@ -56,6 +57,7 @@
 
 #define OLED_DISPLAY_TIME 3000
 #define LOOP_TIME 10000
+#define BUZZER_TIME_DURATION 3000
 
 #endif
 

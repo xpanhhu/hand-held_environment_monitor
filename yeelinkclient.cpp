@@ -3,19 +3,15 @@
 
 #include "yeelinkclient.h"
 
-
 void initYeelinkClient() {
   // Initialize Bridge
   Bridge.begin();
-
 #ifdef CONSOLE_ENABLED
   // Initialize Console
   Console.begin();
-
   // Wait until a Console Monitor is connected.
   while (!Console);
-
-  Console.println("Network init OK.");
+  CONSOLE_PRINTLN("Network init OK.");
 #endif
 }
 
@@ -55,6 +51,8 @@ String ftoa(float val, char resolution)
 
 void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
 {
+  CONSOLE_PRINTLN("sendSensorDataToYeelink()");
+
   // Launch "curl" command and get Arduino ascii art logo from the network
   // curl is command line program for transferring data using different internet protocols
   Process p;        // Create a process and call it "p"
@@ -73,25 +71,22 @@ void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
   param += sensorId;
   param += "/datapoints";
 
-#ifdef CONSOLE_ENABLED
-  Console.println("param = " + param);
-#endif
+  CONSOLE_PRINTLN("param = " + param);
   p.runShellCommandAsynchronously(param);
-
+  
   // Print arduino logo over the Console
   // A process output can be read with the stream methods
-#ifdef CONSOLE_ENABLED
   while (p.available() > 0) {
     char c = p.read();
-    Console.print(c);
+    CONSOLE_PRINT(c);
   }
   // Ensure the last bit of data is sent.
-  Console.flush();
-#endif
+  CONSOLE_FLUSH();
 }
 
-float getSensorDataFromYeelink(String key, String sensorId, String deviceId)
+String getSensorDataFromYeelink(String key, String sensorId, String deviceId)
 {
+  CONSOLE_PRINTLN("getSensorDataFromYeelink()");
   Process p;        // Create a process and call it "p"
   //command is like ("curl -H U-ApiKey:6259afea8328804a22589aa3c8267512 http://api.yeelink.net/v1.0/device/340732/sensor/377542/datapoints/key");
 
@@ -103,26 +98,22 @@ float getSensorDataFromYeelink(String key, String sensorId, String deviceId)
   param += "/sensor/";
   param += sensorId;
   param += "/datapoints/";
-  if (key != NULL) {
+  if (key != "") {
     param += key;
   }
 
-#ifdef CONSOLE_ENABLED
-  Console.println("param = " + param);
-#endif
-  p.runShellCommandAsynchronously(param);
+  CONSOLE_PRINTLN("param = " + param);
+  p.runShellCommand(param);
 
   // Print arduino logo over the Console
   // A process output can be read with the stream methods
-#ifdef CONSOLE_ENABLED
+  String responseText = "";
   while (p.available() > 0) {
-    char c = p.read();
-    Console.print(c);
+    responseText += char(p.read());
   }
+  CONSOLE_PRINTLN(responseText);
   // Ensure the last bit of data is sent.
-  Console.flush();
-#endif
-
-  return 1;
+  CONSOLE_FLUSH();
+  return responseText;
 }
 
