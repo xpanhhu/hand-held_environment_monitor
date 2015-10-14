@@ -11,6 +11,7 @@
  */
 
 float getDustFromDustSensor() {
+#ifdef DUST_SENSOR_ENABLED
   LOG_PRINTLN("getDustFromDustSensor()");
   unsigned long duration;
   unsigned long starttime;
@@ -38,4 +39,5 @@ float getDustFromDustSensor() {
   pinMode(DUST_SENSOR_DIGITAL_PIN, OUTPUT);
 
   return concentration;
+#endif
 }

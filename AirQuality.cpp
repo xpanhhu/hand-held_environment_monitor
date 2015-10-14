@@ -82,26 +82,26 @@ int AirQuality::slope(void)
     {
       timer_index = 0;
       avgVoltage();
-      return 0;
+      return 3;
     }
     else if ((first_vol - last_vol > 400 && first_vol < 700) || first_vol - vol_standard > 150)
     {
       timer_index = 0;
       avgVoltage();
-      return 1;
+      return 2;
 
     }
     else if ((first_vol - last_vol > 200 && first_vol < 700) || first_vol - vol_standard > 50)
     {
       timer_index = 0;
       avgVoltage();
-      return 2;
+      return 1;
     }
     else
     {
       avgVoltage();
       timer_index = 0;
-      return 3;
+      return 0;
     }
   }
   return -1;

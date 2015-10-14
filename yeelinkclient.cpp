@@ -4,6 +4,7 @@
 #include "yeelinkclient.h"
 
 void initYeelinkClient() {
+#ifdef NETWORK_ENABLED
   // Initialize Bridge
   Bridge.begin();
 #ifdef CONSOLE_ENABLED
@@ -12,6 +13,7 @@ void initYeelinkClient() {
   // Wait until a Console Monitor is connected.
   while (!Console);
   CONSOLE_PRINTLN("Network init OK.");
+#endif
 #endif
 }
 
@@ -73,7 +75,7 @@ void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
 
   CONSOLE_PRINTLN("param = " + param);
   p.runShellCommandAsynchronously(param);
-  
+
   // Print arduino logo over the Console
   // A process output can be read with the stream methods
   while (p.available() > 0) {

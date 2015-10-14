@@ -5,13 +5,17 @@ AirQuality airqualitysensor;
 
 void initAirQualitySensor()
 {
+#ifdef AIRQ_SENSOR_ENABLED
   LOG_PRINTLN("initAirQualitySensor()");
   airqualitysensor.init(14);
+#endif
 }
 
 int getAQIFromAirQualitySensor() {
+#ifdef AIRQ_SENSOR_ENABLED
   LOG_PRINTLN("getAQIFromAirQualitySensor()");
   return airqualitysensor.slope();
+#endif
 }
 
 ISR(TIMER2_OVF_vect)

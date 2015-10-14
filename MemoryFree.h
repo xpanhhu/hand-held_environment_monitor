@@ -15,4 +15,12 @@ int freeMemory();
 }
 #endif
 
+#define MEMORY_CHECK_ENABLE//check free memory
+#if (defined MEMORY_CHECK_ENABLE) && (defined CONSOLE_ENABLED)
+#define FREE_MEMORY()\
+  Console.println(freeMemory())
+#else
+#define FREE_MEMORY()
+#endif
+
 #endif

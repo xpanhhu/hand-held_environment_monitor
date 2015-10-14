@@ -69,9 +69,10 @@ const unsigned char TietoLogo[] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-void initOled128Display()
+void initOledDisplay()
 {
-  LOG_PRINTLN("initOled128Display()");
+#ifdef OLED_ENABLED
+  LOG_PRINTLN("initOledDisplay()");
   Wire.begin();
   SeeedOled.init();  //initialze SEEED OLED display
   DDRB |= 0x21;
@@ -81,18 +82,23 @@ void initOled128Display()
   SeeedOled.setPageMode();           //Set addressing mode to Page Mode
   SeeedOled.setTextXY(0, 0);         //Set the cursor to Xth Page, Yth Column
   SeeedOled.drawBitmap((unsigned char*)TietoLogo, 1024);    // 1024 = 128 Pixels * 64 Pixels / 8
+#endif
 }
 
-void displaySampling()
+void displayAirSampling()
 {
+#ifdef OLED_ENABLED
   LOG_PRINTLN("displaySampling()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(4, 0);
   SeeedOled.putString("AIR SAMPLING...");
+  delay(SAMPLING_TIME_DURATION);
+#endif
 }
 
 void displayAirQ(int airQuality)
 {
+#ifdef OLED_ENABLED
   LOG_PRINTLN("displayAirQ()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(0, 0);
@@ -103,16 +109,16 @@ void displayAirQ(int airQuality)
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(4, 0);
   switch (airQuality) {
-    case 0:
+    case 3:
       SeeedOled.putString("Hazardous");
       break;
-    case 1:
+    case 2:
       SeeedOled.putString("Very Unhealthy");
       break;
-    case 2:
+    case 1:
       SeeedOled.putString("Unhealthy");
       break;
-    case 3:
+    case 0:
       SeeedOled.putString("Good");
       break;
     default:
@@ -125,11 +131,13 @@ void displayAirQ(int airQuality)
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(1);
   SeeedOled.putString("/6");
-  delay(OLED_DISPLAY_TIME);
+  delay(DATA_DISPLAY_TIME_DURATION);
+#endif
 }
 
 void displayTemp(float temp)
 {
+#ifdef OLED_ENABLED
   LOG_PRINTLN("displayTemp()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(0, 0);
@@ -139,18 +147,20 @@ void displayTemp(float temp)
   SeeedOled.setTextXY(2, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putNumber(temp);
+  SeeedOled.putFloat(temp);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(2);
   SeeedOled.putString("/6");
-  delay(OLED_DISPLAY_TIME);
+  delay(DATA_DISPLAY_TIME_DURATION);
+#endif
 }
 
 void displayHumidity(float humidity)
 {
+#ifdef OLED_ENABLED
   LOG_PRINTLN("displayHumidity()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(0, 0);
@@ -160,18 +170,20 @@ void displayHumidity(float humidity)
   SeeedOled.setTextXY(2, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putNumber(humidity);
+  SeeedOled.putFloat(humidity);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(3);
   SeeedOled.putString("/6");
-  delay(OLED_DISPLAY_TIME);
+  delay(DATA_DISPLAY_TIME_DURATION);
+#endif
 }
 
 void displayDust(float dust)
 {
+#ifdef OLED_ENABLED
   LOG_PRINTLN("displayDust()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(0, 0);
@@ -181,18 +193,20 @@ void displayDust(float dust)
   SeeedOled.setTextXY(2, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putNumber(dust);
+  SeeedOled.putFloat(dust);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(4);
   SeeedOled.putString("/6");
-  delay(OLED_DISPLAY_TIME);
+  delay(DATA_DISPLAY_TIME_DURATION);
+#endif
 }
 
 void displayCH4(float ch4)
 {
+#ifdef OLED_ENABLED
   LOG_PRINTLN("displayCH4()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(0, 0);
@@ -202,18 +216,20 @@ void displayCH4(float ch4)
   SeeedOled.setTextXY(2, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putNumber(ch4);
+  SeeedOled.putFloat(ch4);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(5);
   SeeedOled.putString("/6");
-  delay(OLED_DISPLAY_TIME);
+  delay(DATA_DISPLAY_TIME_DURATION);
+#endif
 }
 
 void displayHCHO(float hcho)
 {
+#ifdef OLED_ENABLED
   LOG_PRINTLN("displayHCHO()");
   SeeedOled.clearDisplay();
   SeeedOled.setTextXY(0, 0);
@@ -223,14 +239,15 @@ void displayHCHO(float hcho)
   SeeedOled.setTextXY(2, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(4, 0);
-  SeeedOled.putNumber(hcho);
+  SeeedOled.putFloat(hcho);
   SeeedOled.setTextXY(6, 0);
   SeeedOled.putString("----------------");
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(6);
   SeeedOled.putString("/6");
-  delay(OLED_DISPLAY_TIME);
+  delay(DATA_DISPLAY_TIME_DURATION);
+#endif
 }
 
 

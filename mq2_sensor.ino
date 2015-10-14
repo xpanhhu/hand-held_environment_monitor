@@ -1,6 +1,7 @@
 float MQ2_R0;
 
 void initMQ2Sensor() {
+#ifdef MQ2_SENSOR_ENABLED
   LOG_PRINTLN("initMQ2Sensor()");
   float sensor_volt;
   float RS_air; //  Get the value of RS via in a clear air
@@ -14,9 +15,11 @@ void initMQ2Sensor() {
   sensor_volt = sensorValue / 1024 * 5.0;
   RS_air = (5.0 - sensor_volt) / sensor_volt; // omit *RL
   MQ2_R0 = RS_air; // The ratio of RS/R0 is 10 in a clear air
+#endif
 }
 
 float getCH4FromMQ2Sensor() {
+#ifdef MQ2_SENSOR_ENABLED
   LOG_PRINTLN("getCH4FromMQ2Sensor()");
   float sensor_volt;
   float RS_gas; // Get value of RS in a GAS
@@ -32,4 +35,5 @@ float getCH4FromMQ2Sensor() {
 
   //return CH4_PPM * 16 / 22.4 * 273 / (273 + 25);
   return CH4_PPM;
+#endif
 }
