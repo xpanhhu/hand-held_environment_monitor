@@ -9,7 +9,6 @@ void initBuzzer()
 void playAlarm(int sensorIndex, float sensorValue)
 {
   LOG_PRINTLN("playAlarm()");
-#ifdef ALARM_ENABLED
   float yeeLinkValue = getSensorDataFromYeelink("", "378115");
   if (yeeLinkValue < 1)return;
   if (sensorValue >= threshold[sensorIndex]) {
@@ -17,7 +16,4 @@ void playAlarm(int sensorIndex, float sensorValue)
   } else {
     digitalWrite(BUZZER_DIGITAL_PIN, LOW);
   }
-#endif
-
-
 }

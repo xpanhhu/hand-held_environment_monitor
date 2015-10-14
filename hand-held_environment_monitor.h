@@ -10,10 +10,9 @@
 #define MQ2_SENSOR_ENABLED
 #define DHT_SENSOR_ENABLED
 #define AIRQ_SENSOR_ENABLED
-#define ALARM_ENABLED
 
 // Comment out the SERIAL_LOG_ENABLE if need to close debug log
-// #define SERIAL_LOG_ENABLE
+//#define SERIAL_LOG_ENABLE
 #ifdef SERIAL_LOG_ENABLE
 #define LOG_PRINT(str)\
   Serial.print(str)
@@ -40,7 +39,6 @@
 #define BUZZER_DIGITAL_PIN 5
 #define DUST_SENSOR_DIGITAL_PIN 8
 
-#define SENSOR_DATA_LEN 6
 #define DUST_DATA_INDEX 0
 #define HCHO_DATA_INDEX 1
 #define AIRQ_DATA_INDEX 2
@@ -55,6 +53,9 @@
 #define SENSOR_TEMPERATURE_DATA_INDEX "377543"//Temperature
 #define SENSOR_HUMIDITY_DATA_INDEX "377933" //Humidity 
 #define SENSOR_BUZZER_DATA_INDEX "378115" //BUZZER
+
+#define OLED_DISPLAY_TIME 3000
+#define LOOP_TIME 10000
 
 #endif
 

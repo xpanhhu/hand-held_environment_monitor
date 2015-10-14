@@ -38,57 +38,115 @@ void setup() {
 #endif
 }
 
+void testAirQuality()
+{
+  LOG_PRINTLN("---------------testAirQuality()---------------");
+#ifdef AIRQ_SENSOR_ENABLED
+  int airQuality = getAQIFromAirQualitySensor();
+#ifdef OLED_ENABLED
+  displayAirQ(airQuality);
+#endif
+#ifdef BUZZER_ENABLED
+  playAlarm(AIRQ_DATA_INDEX, airQuality);
+#endif
+#ifdef NETWORK_ENABLED
+  sendSensorDataToYeelink(airQuality, SENSOR_AIRQ_DATA_INDEX);
+#endif
+#endif
+}
+
+void testDust()
+{
+  LOG_PRINTLN("---------------testDust()---------------");
+#ifdef DUST_SENSOR_ENABLED
+  float dust = getDustFromDustSensor();
+#ifdef OLED_ENABLED
+  displayDust(dust);
+#endif
+#ifdef BUZZER_ENABLED
+  playAlarm(DUST_DATA_INDEX, dust);
+#endif
+#ifdef NETWORK_ENABLED
+  sendSensorDataToYeelink(dust, SENSOR_DUST_DATA_INDEX);
+#endif
+#endif
+}
+
+void testMQ2()
+{
+  LOG_PRINTLN("---------------testMQ2()---------------");
+#ifdef MQ2_SENSOR_ENABLED
+  float ch4 = getCH4FromMQ2Sensor();
+#ifdef OLED_ENABLED
+  displayCH4(ch4);
+#endif
+#ifdef BUZZER_ENABLED
+  playAlarm(CH4_DATA_INDEX, ch4);
+#endif
+#ifdef NETWORK_ENABLED
+  sendSensorDataToYeelink(ch4, SENSOR_CH4_DATA_INDEX);
+#endif
+#endif
+}
+
+void testDHT()
+{
+  LOG_PRINTLN("---------------testDHT()---------------");
+#ifdef DHT_SENSOR_ENABLED
+  float temp = getTemperatureFromDHTSensor();
+#ifdef OLED_ENABLED
+  displayTemp(temp);
+#endif
+#ifdef BUZZER_ENABLED
+  playAlarm(TEMPERATURE_DATA_INDEX, temp);
+#endif
+#ifdef NETWORK_ENABLED
+  sendSensorDataToYeelink(temp, SENSOR_TEMPERATURE_DATA_INDEX);
+#endif
+  float humidity = getHumidityFromDHTSensor();
+#ifdef OLED_ENABLED
+  displayHumidity(humidity);
+#endif
+#ifdef BUZZER_ENABLED
+  playAlarm(HUMIDITY_DATA_INDEX, humidity);
+#endif
+#ifdef NETWORK_ENABLED
+  sendSensorDataToYeelink(humidity, SENSOR_HUMIDITY_DATA_INDEX);
+#endif
+#endif
+}
+
+void testHCHO()
+{
+  LOG_PRINTLN("---------------testHCHO()---------------");
+#ifdef HCHO_SENSOR_ENABLED
+  float hcho = getHCHOFromHCHOSensor();
+#ifdef OLED_ENABLED
+  displayHCHO(hcho);
+#endif
+#ifdef BUZZER_ENABLED
+  playAlarm(HCHO_DATA_INDEX, hcho);
+#endif
+#ifdef NETWORK_ENABLED
+  sendSensorDataToYeelink(hcho, SENSOR_HCHO_DATA_INDEX);
+#endif
+#endif
+}
+
 void loop() {
   LOG_PRINTLN("loop()");
-
   FREE_MEMORY();
+  
+  testAirQuality();
+  testDHT();
+  testDust();
+  testMQ2();
+  testHCHO();
 
-  // data sampling
 #ifdef OLED_ENABLED
   displaySampling();
 #endif
 
-  // get sensor data from sensor
-  float sensorData[SENSOR_DATA_LEN];
-#ifdef AIRQ_SENSOR_ENABLED
-  sensorData[AIRQ_DATA_INDEX] = getAQIFromAirQualitySensor();
-  playAlarm(AIRQ_DATA_INDEX, sensorData[AIRQ_DATA_INDEX]);
-#endif
-#ifdef DHT_SENSOR_ENABLED
-  sensorData[DUST_DATA_INDEX] = getDustFromDustSensor();
-  playAlarm(DUST_DATA_INDEX, sensorData[DUST_DATA_INDEX]);
-#endif
-#ifdef MQ2_SENSOR_ENABLED
-  sensorData[CH4_DATA_INDEX] = getCH4FromMQ2Sensor();
-  playAlarm(CH4_DATA_INDEX, sensorData[CH4_DATA_INDEX]);
-#endif
-#ifdef HCHO_SENSOR_ENABLED
-  sensorData[HCHO_DATA_INDEX] = getHCHOFromHCHOSensor();
-  playAlarm(HCHO_DATA_INDEX, sensorData[HCHO_DATA_INDEX]);
-#endif
-#ifdef DHT_SENSOR_ENABLED
-  sensorData[TEMPERATURE_DATA_INDEX] = getTemperatureFromDHTSensor();
-  sensorData[HUMIDITY_DATA_INDEX] = getHumidityFromDHTSensor();
-  playAlarm(TEMPERATURE_DATA_INDEX, sensorData[TEMPERATURE_DATA_INDEX]);
-  playAlarm(HUMIDITY_DATA_INDEX, sensorData[HUMIDITY_DATA_INDEX]);
-#endif
-
-  // display sensor data in oled
-#ifdef OLED_ENABLED
-  displaySensorData(sensorData);
-  displaySampling();
-#endif
-
-  // send sensor data to yeelink server
-#ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(sensorData[AIRQ_DATA_INDEX], SENSOR_AIRQ_DATA_INDEX);
-  sendSensorDataToYeelink(sensorData[HCHO_DATA_INDEX], SENSOR_HCHO_DATA_INDEX);
-  sendSensorDataToYeelink(sensorData[DUST_DATA_INDEX], SENSOR_DUST_DATA_INDEX);
-  sendSensorDataToYeelink(sensorData[CH4_DATA_INDEX], SENSOR_CH4_DATA_INDEX);
-  sendSensorDataToYeelink(sensorData[TEMPERATURE_DATA_INDEX], SENSOR_TEMPERATURE_DATA_INDEX);
-  sendSensorDataToYeelink(sensorData[HUMIDITY_DATA_INDEX], SENSOR_HUMIDITY_DATA_INDEX);
-#endif
-
-  delay(10000);
+  delay(LOOP_TIME);
 
 }
