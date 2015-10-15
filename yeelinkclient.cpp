@@ -3,7 +3,7 @@
 
 #include "yeelinkclient.h"
 
-void initYeelinkClient() {
+void initCloudClient() {
   // Initialize Bridge
   Bridge.begin();
 #ifdef CONSOLE_ENABLED
@@ -49,9 +49,10 @@ String ftoa(float val, char resolution)
   return result;
 }
 
-void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
+#ifndef USE_XIVELY_CLOUD
+void sendSensorDataToCloud(float dataParam, String sensorId, String deviceId)
 {
-  CONSOLE_PRINTLN("sendSensorDataToYeelink()");
+  CONSOLE_PRINTLN("sendSensorDataToCloud()");
 
   // Launch "curl" command and get Arduino ascii art logo from the network
   // curl is command line program for transferring data using different internet protocols
@@ -84,9 +85,9 @@ void sendSensorDataToYeelink(float dataParam, String sensorId, String deviceId)
   CONSOLE_FLUSH();
 }
 
-String getSensorDataFromYeelink(String key, String sensorId, String deviceId)
+String getSensorDataFromCloud(String key, String sensorId, String deviceId)
 {
-  CONSOLE_PRINTLN("getSensorDataFromYeelink()");
+  CONSOLE_PRINTLN("getSensorDataFromCloud()");
   Process p;        // Create a process and call it "p"
   //command is like ("curl -H U-ApiKey:6259afea8328804a22589aa3c8267512 http://api.yeelink.net/v1.0/device/340732/sensor/377542/datapoints/key");
 
@@ -116,4 +117,42 @@ String getSensorDataFromYeelink(String key, String sensorId, String deviceId)
   CONSOLE_FLUSH();
   return responseText;
 }
+#else
+void sendSensorDataToCloud(float dataParam, String sensorId, String deviceId)
+{
+  CONSOLE_PRINTLN("sendSensorDataToCloud()");
+
+  // Launch "curl" command and get Arduino ascii art logo from the network
+  // curl is command line program for transferring data using different internet protocols
+  Process p;        // Create a process and call it "p"
+  //command is like ("curl -X PUT -d '{"version":"1.0.0","datastreams":[{"id":"CH4","current_value":"40"}]}' -H X-ApiKey:NRc7OwLJgi3TjsD5IeeNLD1vUBjMFJ8aYiNcCNd3EuqitLJY http://api.xively.com/v2/feeds/641992916");
+
+  String param = "curl -X PUT -d '{\"version\":\"1.0.0\",\"datastreams\":[{\"id\":\"";
+  param += sensorId;
+  param += "\",\"current_value\":\"";
+  param += ftoa(dataParam, 2);
+  param += "\"}]}'";
+  param += " -H X-ApiKey:";
+  param += API_KEY;
+  param += " http://api.xively.com/v2/feeds/";
+  param += deviceId;
+
+  CONSOLE_PRINTLN("param = " + param);
+  p.runShellCommandAsynchronously(param);
+
+  // Print arduino logo over the Console
+  // A process output can be read with the stream methods
+  while (p.available() > 0) {
+    char c = p.read();
+    CONSOLE_PRINT(c);
+  }
+  // Ensure the last bit of data is sent.
+  CONSOLE_FLUSH();
+}
+
+String getSensorDataFromCloud(String key, String sensorId, String deviceId)
+{
+  return "0";
+}
+#endif
 
