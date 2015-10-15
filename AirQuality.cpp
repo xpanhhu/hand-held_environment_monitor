@@ -20,6 +20,7 @@
 */
 #include"Arduino.h"
 #include"AirQuality.h"
+#include "hand-held_environment_monitor.h"
 
 //Get the avg voltage in 5 minutes.
 
@@ -29,6 +30,8 @@ void AirQuality::avgVoltage()
   {
     vol_standard = temp / 150;
     temp = 0;
+    LOG_PRINT("Vol_standard in 5 minutes:");
+    LOG_PRINTLN(vol_standard);
     i = 0;
   }
   else
@@ -42,15 +45,19 @@ void AirQuality::init(int pin)
   _pin = pin;
   pinMode(_pin, INPUT);
   unsigned char i = 0;
+  LOG_PRINTLN("sys_starting...");
   delay(20000);//200000
   init_voltage = analogRead(_pin);
+  LOG_PRINTLN("The init voltage is ...");
+  LOG_PRINTLN(init_voltage);
   while (init_voltage)
   {
     if (init_voltage < 798 && init_voltage > 10) // the init voltage is ok
     {
-      first_vol = analogRead(A2); //initialize first value
+      first_vol = analogRead(AIRQ_SENSOR_ANALOG_PIN); //initialize first value
       last_vol = first_vol;
       vol_standard = last_vol;
+      LOG_PRINTLN("Sensor ready.");
       error = false;;
       break;
     }
@@ -58,11 +65,13 @@ void AirQuality::init(int pin)
     {
       i++;
       delay(60000);//60000
-      init_voltage = analogRead(A2);
+      LOG_PRINTLN("waitting sensor init..");
+      init_voltage = analogRead(AIRQ_SENSOR_ANALOG_PIN);
       if (i == 5)
       {
         i = 0;
         error = true;
+        LOG_PRINTLN("Sensor Error!");
       }
     }
     else
@@ -72,6 +81,7 @@ void AirQuality::init(int pin)
   TCCR2A = 0; //normal model
   TCCR2B = 0x07; //set clock as 1024*(1/16M)
   TIMSK2 = 0x01; //enable overflow interrupt
+  LOG_PRINTLN("Test begin...");
   sei();
 }
 int AirQuality::slope(void)
@@ -80,12 +90,16 @@ int AirQuality::slope(void)
   {
     if (first_vol - last_vol > 400 || first_vol > 700)
     {
+      LOG_PRINTLN("High pollution! Force signal active.");
       timer_index = 0;
       avgVoltage();
       return 3;
     }
     else if ((first_vol - last_vol > 400 && first_vol < 700) || first_vol - vol_standard > 150)
     {
+      LOG_PRINT("sensor_value:");
+      LOG_PRINT(first_vol);
+      LOG_PRINTLN("\t High pollution!");
       timer_index = 0;
       avgVoltage();
       return 2;
@@ -93,6 +107,10 @@ int AirQuality::slope(void)
     }
     else if ((first_vol - last_vol > 200 && first_vol < 700) || first_vol - vol_standard > 50)
     {
+      //LOG_PRINTLN(first_vol-last_vol);
+      LOG_PRINT("sensor_value:");
+      LOG_PRINT(first_vol);
+      LOG_PRINTLN("\t Low pollution!");
       timer_index = 0;
       avgVoltage();
       return 1;
@@ -100,6 +118,9 @@ int AirQuality::slope(void)
     else
     {
       avgVoltage();
+      LOG_PRINT("sensor_value:");
+      LOG_PRINT(first_vol);
+      LOG_PRINTLN("\t Air fresh");
       timer_index = 0;
       return 0;
     }
