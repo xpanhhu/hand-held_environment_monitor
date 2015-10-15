@@ -10,7 +10,12 @@ void playAlarm(float sensorValue, int sensorIndex)
 {
 #ifdef BUZZER_ENABLED
   LOG_PRINTLN("playAlarm()");
+#ifdef NETWORK_ENABLED
   String responseText = getSensorDataFromYeelink("", "378115");// "{\"timestamp\":\"2015-10-14T16:52:54\",\"value\":1}";
+#else
+  LOG_PRINTLN("NETWORK is disabled");
+  return;
+#endif
   if (responseText.indexOf("\"value\":0") > 0)
   {
     LOG_PRINTLN("Alarm is off");

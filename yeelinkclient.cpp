@@ -4,7 +4,6 @@
 #include "yeelinkclient.h"
 
 void initYeelinkClient() {
-#ifdef NETWORK_ENABLED
   // Initialize Bridge
   Bridge.begin();
 #ifdef CONSOLE_ENABLED
@@ -13,7 +12,6 @@ void initYeelinkClient() {
   // Wait until a Console Monitor is connected.
   while (!Console);
   CONSOLE_PRINTLN("Network init OK.");
-#endif
 #endif
 }
 
