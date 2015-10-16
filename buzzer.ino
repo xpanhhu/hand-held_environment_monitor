@@ -12,7 +12,7 @@ void playAlarm(float sensorValue, int sensorIndex)
   LOG_PRINTLN("playAlarm()");
   String responseText = "{\"timestamp\":\"2015-10-14T16:52:54\",\"value\":0}";
 #ifdef NETWORK_ENABLED
-  responseText = getSensorDataFromYeelink("", "378115");//
+  responseText = getSensorDataFromYeelink("", "378115");
 #else
   LOG_PRINTLN("NETWORK is disabled");
   return;
