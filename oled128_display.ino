@@ -14,6 +14,8 @@
 #define DIVIDING_LINE "----------------"
 #define BLANK_CHAR "             "
 
+#define LOGO_TIME_DURATION 5000
+
 const unsigned char TietoLogo[] PROGMEM = {
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -94,6 +96,7 @@ void initOledDisplay()
   SeeedOled.setPageMode();           //Set addressing mode to Page Mode
   SeeedOled.setTextXY(0, 0);         //Set the cursor to Xth Page, Yth Column
   SeeedOled.drawBitmap((unsigned char*)TietoLogo, 1024);    // 1024 = 128 Pixels * 64 Pixels / 8
+  delay(LOGO_TIME_DURATION);
 #endif
 }
 

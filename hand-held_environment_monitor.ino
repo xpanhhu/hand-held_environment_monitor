@@ -35,7 +35,7 @@ void loop() {
   testDust();
   testMQ2();
   testHCHO();
-//  testAirQuality();
+  testAirQuality();
 }
 
 void initSerial()
