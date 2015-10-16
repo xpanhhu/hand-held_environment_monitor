@@ -15,7 +15,7 @@
 
 void setup() {
 #ifdef NETWORK_ENABLED
-  initYeelinkClient();
+  initCloudClient();
 #endif
   initSerial();
   initOledDisplay();
@@ -52,7 +52,7 @@ void testAirQuality()
   displayAirQ(aqi);
   playAlarm(aqi, AIRQ_DATA_INDEX);
 #ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(aqi, AIRQ_SENSOR_ID);
+  sendSensorDataToCloud(aqi, AIRQ_SENSOR_ID);
 #endif
 }
 
@@ -63,13 +63,13 @@ void testDHT()
   displayTemp(temp);
   playAlarm(temp, DHT_TEMP_DATA_INDEX);
 #ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(temp, DHT_TEMP_SENSOR_ID);
+  sendSensorDataToCloud(temp, DHT_TEMP_SENSOR_ID);
 #endif
   float humidity = getHumidityFromDHTSensor();
   displayHumidity(humidity);
   playAlarm(humidity, DHT_HUMIDITY_DATA_INDEX);
 #ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(humidity, DHT_HUMIDITY_SENSOR_ID);
+  sendSensorDataToCloud(humidity, DHT_HUMIDITY_SENSOR_ID);
 #endif
 }
 
@@ -80,7 +80,7 @@ void testDust()
   displayDust(dust);
   playAlarm(dust, DUST_DATA_INDEX);
 #ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(dust, DUST_SENSOR_ID);
+  sendSensorDataToCloud(dust, DUST_SENSOR_ID);
 #endif
 }
 
@@ -91,7 +91,7 @@ void testMQ2()
   displayCH4(ch4);
   playAlarm(ch4, MQ2_CH4_DATA_INDEX);
 #ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(ch4, MQ2_CH4_SENSOR_ID);
+  sendSensorDataToCloud(ch4, MQ2_CH4_SENSOR_ID);
 #endif
 }
 
@@ -102,7 +102,7 @@ void testHCHO()
   displayHCHO(hcho);
   playAlarm(hcho, HCHO_DATA_INDEX);
 #ifdef NETWORK_ENABLED
-  sendSensorDataToYeelink(hcho, HCHO_SENSOR_ID);
+  sendSensorDataToCloud(hcho, HCHO_SENSOR_ID);
 #endif
 }
 

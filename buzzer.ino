@@ -10,8 +10,9 @@ void playAlarm(float sensorValue, int sensorIndex)
 {
 #ifdef BUZZER_ENABLED
   LOG_PRINTLN("playAlarm()");
+  String responseText = "{\"timestamp\":\"2015-10-14T16:52:54\",\"value\":0}";
 #ifdef NETWORK_ENABLED
-  String responseText = getSensorDataFromYeelink("", "378115");// "{\"timestamp\":\"2015-10-14T16:52:54\",\"value\":1}";
+  responseText = getSensorDataFromCloud("", "378115");
 #else
   LOG_PRINTLN("NETWORK is disabled");
   return;
