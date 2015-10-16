@@ -2,6 +2,8 @@
 #include <Wire.h>
 #include <avr/pgmspace.h>
 
+#define PAGE_SIZE 6
+
 const unsigned char TietoLogo[] PROGMEM = {
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -130,7 +132,8 @@ void displayAirQ(int airQuality)
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(1);
-  SeeedOled.putString("/6");
+  SeeedOled.putString("/");
+  SeeedOled.putNumber(PAGE_SIZE);
   delay(DATA_DISPLAY_TIME_DURATION);
 #endif
 }
@@ -153,7 +156,8 @@ void displayTemp(float temp)
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(2);
-  SeeedOled.putString("/6");
+  SeeedOled.putString("/");
+  SeeedOled.putNumber(PAGE_SIZE);
   delay(DATA_DISPLAY_TIME_DURATION);
 #endif
 }
@@ -176,7 +180,8 @@ void displayHumidity(float humidity)
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(3);
-  SeeedOled.putString("/6");
+  SeeedOled.putString("/");
+  SeeedOled.putNumber(PAGE_SIZE);
   delay(DATA_DISPLAY_TIME_DURATION);
 #endif
 }
@@ -199,7 +204,8 @@ void displayDust(float dust)
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(4);
-  SeeedOled.putString("/6");
+  SeeedOled.putString("/");
+  SeeedOled.putNumber(PAGE_SIZE);
   delay(DATA_DISPLAY_TIME_DURATION);
 #endif
 }
@@ -222,7 +228,8 @@ void displayCH4(float ch4)
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(5);
-  SeeedOled.putString("/6");
+  SeeedOled.putString("/");
+  SeeedOled.putNumber(PAGE_SIZE);
   delay(DATA_DISPLAY_TIME_DURATION);
 #endif
 }
@@ -245,7 +252,8 @@ void displayHCHO(float hcho)
   SeeedOled.setTextXY(7, 0);
   SeeedOled.putString("        PAGE ");
   SeeedOled.putNumber(6);
-  SeeedOled.putString("/6");
+  SeeedOled.putString("/");
+  SeeedOled.putNumber(PAGE_SIZE);
   delay(DATA_DISPLAY_TIME_DURATION);
 #endif
 }
