@@ -30,12 +30,12 @@ void loop() {
   FREE_MEMORY();
   
   displayAirSampling();
-
-  testAirQuality();
+  
   testDHT();
   testDust();
   testMQ2();
   testHCHO();
+//  testAirQuality();
 }
 
 void initSerial()
