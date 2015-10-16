@@ -44,7 +44,7 @@
 #define DHT_HUMIDITY_DATA_INDEX 5
 
 const float ALARM_THRESHOLD_MINS[] = { 0, 0, 0, 0, 15, 30};
-const float ALARM_THRESHOLD_MAXS[] = { 2000, 0.08, 1, 2000, 30, 80};
+const float ALARM_THRESHOLD_MAXS[] = { 2000, 0.08, 1, 2000, 30, 60};
 
 #endif
 

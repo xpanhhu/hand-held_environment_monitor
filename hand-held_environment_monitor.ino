@@ -19,7 +19,7 @@ void setup() {
 #endif
   initSerial();
   initOledDisplay();
-  initAirQualitySensor();
+//  initAirQualitySensor();
   initMQ2Sensor();
   initDHTSensor();
   initBuzzer();
@@ -35,7 +35,7 @@ void loop() {
   testDust();
   testMQ2();
   testHCHO();
-  testAirQuality();
+//  testAirQuality();
 }
 
 void initSerial()
