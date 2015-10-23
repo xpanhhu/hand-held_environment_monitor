@@ -22,7 +22,7 @@ void playAlarm(float sensorValue, int sensorIndex)
     LOG_PRINTLN("Alarm is off");
     return;
   }
-  if (sensorValue >= ALARM_THRESHOLD_MAXS[sensorIndex] || sensorValue <= ALARM_THRESHOLD_MINS[sensorIndex]) {
+  if (sensorValue > ALARM_THRESHOLD_MAXS[sensorIndex] || sensorValue < ALARM_THRESHOLD_MINS[sensorIndex]) {
     LOG_PRINTLN("Trun on buzzer");
     digitalWrite(BUZZER_DIGITAL_PIN, HIGH);
     delay(BUZZER_TIME_DURATION);
